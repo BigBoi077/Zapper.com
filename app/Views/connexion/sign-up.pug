@@ -1,0 +1,56 @@
+doctype html
+html
+	head
+		title Zapper - Login
+		meta(charset="utf-8", name="viewport", content="width=device-width, initial-scale=1")
+		link(href="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js")
+		link(rel="stylesheet", href="/stylesheets/style.css")
+	body.reveal
+		.columns
+			.column.is-2.ml-3
+				a(href="#")
+					img(src="/assets/images/zapper-logo.png")
+			.column.main-content
+				include ../components/header
+				hr
+				form.base-margin.base-padding.box(action="#", method="post")
+					.columns
+						.column
+							.control
+								i.fa.fa-angle-down.ml-1
+								input.input(type="text", name="firstname", placeholder="Jace")
+						.column
+							.control
+								i.fa.fa-angle-down.ml-1
+								input.input(type="text", name="lastname", placeholder="Beleren")
+					.control
+						i.fa.fa-envelope
+						input.input(type="text", name="email" placeholder="jace@wotc.com")
+					br
+					.control
+						i.fa.fa-phone-alt
+						input.input(type="text", name="phone-number" placeholder="450-897-3214")
+					br
+					.control
+						i.fa.fa-user.ml-1
+						input.input(type="text", name="username", placeholder="JaceTheBoogeyMan987")
+					br
+					.control
+						i.fa.fa-fingerprint.ml-1
+						input.input(type="password", name="password" placeholder="*********")
+					br
+					input(type="checkbox")
+					i.fa.fa-mars.ml-2.mr-4
+					input(type="checkbox")
+					i.fa.fa-venus.ml-2.mr-4
+					input(type="checkbox")
+					i.fa.fa-transgender-alt.ml-2.mr-4
+					br
+					br
+					.columns
+						.column.flex-end
+							button.form-button.button(type="submit") Register
+			.column.is-2
+				// empty
+
+		include ../components/scripts

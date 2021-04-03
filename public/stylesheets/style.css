@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@300&display=swap');
+@import "vendor/bulma.min.css";
+@import "vendor/fontawesome.min.css";
+
+:root {
+    --main-blue: #34b4cc;
+    --main-yellow: #eae374;
+    --main-red: #ec4c4c;
+    --main-green: #abcbac;
+    --main-orange: #ec8454;
+    --accent-orange: #eca864;
+    --main-purple: #5c80d0;
+    --white: #e7e7e7;
+    --small-padding: 1em;
+    --medium-padding: 3em;
+    --small-margin: 1em;
+    --medium-margin: 3em;
+}
+
+body {
+    font-size: 100%;
+    font-family: Exo;
+}
+
+.header-title {
+    font-size: 3em;
+}
+
+.welcome {
+    font-size: 125%;
+}
+
+.breadcrumb-elem {
+    font-size: 1.25em;
+}
+
+.main-content {
+    margin-top: 4em;
+}
+
+.base-margin {
+    margin: var(--medium-margin);
+}
+
+.base-padding {
+    padding: var(--medium-padding);
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.form-button {
+    color: var(--white);
+    background-color: var(--main-purple);
+    outline-color: var(--main-blue);
+}

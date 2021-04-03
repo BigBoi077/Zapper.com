@@ -1,0 +1,24 @@
+.columns.is-vcentered
+	.column.header-title
+		h1 Zapper
+	.column.flex-end
+		nav.navbar
+			.navbar-brand
+				nav.navbar(role='navigation' aria-label='main navigation')
+					.navbar-brand
+						span.navbar-burger.burger(data-targer="items")
+							span(aria-hidden='true')
+							span(aria-hidden='true')
+							span(aria-hidden='true')
+					#items.navbar-menu.is-hidden-desktop
+						.navbar-end
+							each item in menuItems
+								a.navbar-item(href=item)=item
+
+		nav.breadcrumb.has-bullet-separator.is-hidden-touch(aria-label="breadcrumbs")
+			ul
+				each item in menuItems
+					if item === currentPage
+						li.is-active: a.breadcrumb-elem(href=item)=item
+					else
+						li: a.breadcrumb-elem(href=item)=item

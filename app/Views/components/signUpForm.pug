@@ -1,0 +1,41 @@
+form.base-margin.base-padding.box(action="#", method="post")
+  .columns
+    .column
+      .control
+        i.fa.fa-angle-down.ml-1
+        input.input(type="text", name="firstname", placeholder="Jace")
+    .column
+      .control
+        i.fa.fa-angle-down.ml-1
+        input.input(type="text", name="lastname", placeholder="Beleren")
+  .control
+    i.fa.fa-envelope
+    input.input(type="text", name="email" placeholder="jace@wotc.com")
+  br
+  .control
+    i.fa.fa-phone-alt
+    input.input(type="text", name="phone-number" placeholder="450-897-3214")
+  br
+  .control
+    i.fa.fa-user.ml-1
+    input.input(type="text", name="username", placeholder="JaceTheBoogeyMan987")
+  br
+  .control
+    i.fa.fa-fingerprint.ml-1
+    input.input(type="password", name="password" placeholder="*********")
+  br
+  .control
+    label(class="radio")
+      input(type="radio", name="gender", value="male")
+      i.fa.fa-mars.ml-2.mr-4
+    label(class="radio")
+      input(type="radio", name="gender", value="female")
+      i.fa.fa-venus.ml-2.mr-4
+    label(class="radio")
+      input(type="radio", name="gender", value="other")
+      i.fa.fa-transgender-alt.ml-2.mr-4
+  br
+  br
+  .columns
+    .column.flex-end
+      button.form-button.button(type="submit") Register

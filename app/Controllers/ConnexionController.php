@@ -6,8 +6,10 @@ class ConnexionController extends SecurityController
 
     public function initializeRoutes()
     {
-        $this->get("/Connexion/Login", "index");
-        $this->get("/Connexion/Register", "register");
+        // Todo : faire un href et un nom pour le header (faire un classe PHP)
+        $this->get("/", "index");
+        $this->get("/Login", "index");
+        $this->get("/Register", "register");
     }
 
     public function index() {

@@ -1,21 +1,9 @@
-doctype html
-html
-	head
-		title Zapper - Login
-		meta(charset="utf-8", name="viewport", content="width=device-width, initial-scale=1")
-		link(href="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js")
-		link(rel="stylesheet", href="/stylesheets/style.css")
-	body.reveal
-		.columns
-			.column.is-2.ml-3
-				a(href="#")
-					img(src="/assets/images/zapper-logo.png")
-			.column.main-content
-				include ../components/header
-				hr
-				h1.welcome.mt-6.has-text-centered Welcome to Zapper, your own personal password manager.
-				include ../components/loginForm
-			.column.is-2
-				// empty
+extends ../layout
 
-		include ../components/scripts
+block content
+	hr
+	h1.welcome.mt-6.has-text-centered Welcome to Zapper, your own personal password manager.
+	include ../components/loginForm
+
+block scripts
+	include ../components/scripts

@@ -34,6 +34,10 @@ body {
     font-size: 1.25em;
 }
 
+.header-container {
+    height: 8em;
+}
+
 .main-content {
     margin-top: 4em;
 }

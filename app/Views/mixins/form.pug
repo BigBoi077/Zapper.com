@@ -3,3 +3,14 @@ mixin input(label, name)
 		label=label
 		input.form-control(name=name value=val(name))
 
+mixin genders()
+	.control
+		label(class="radio")
+			input(type="radio", name="gender", value="male")
+			i.fa.fa-mars.ml-2.mr-4
+		label(class="radio")
+			input(type="radio", name="gender", value="female")
+			i.fa.fa-venus.ml-2.mr-4
+		label(class="radio")
+			input(type="radio", name="gender", value="other")
+			i.fa.fa-transgender-alt.ml-2.mr-4

@@ -2,10 +2,11 @@
 
 use stdClass;
 
-class ConnexionBroker extends Broker
+class SignUpBroker extends Broker
 {
     function insert(stdClass $user)
     {
-    
+        $form = $this->buildForm();
+
     }
 }

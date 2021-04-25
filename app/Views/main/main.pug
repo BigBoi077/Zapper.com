@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+  hr
+  include ../mixins/flash
+  +flashBox()
+  h1.welcome.mt-6.has-text-centered Here you can manage you own personal passwords for different services.
+
+block scripts
+  include ../components/scripts

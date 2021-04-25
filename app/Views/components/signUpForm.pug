@@ -1,24 +1,28 @@
-form.base-margin.base-padding.box(action="#", method="post")
+include ../mixins/flash
+
++flashBox()
+
+form.base-margin.base-padding.box(action="/Connexion/Register", method="post")
   .columns
     .column
       .control
         i.fa.fa-angle-down.ml-1
-        input.input(type="text", name="firstname", placeholder="Jace")
+        input.input(type="text", name="firstname", placeholder="Jace", value=values.firstname)
     .column
       .control
         i.fa.fa-angle-down.ml-1
-        input.input(type="text", name="lastname", placeholder="Beleren")
+        input.input(type="text", name="lastname", placeholder="Beleren", value=values.lastname)
   .control
     i.fa.fa-envelope
-    input.input(type="text", name="email" placeholder="jace@wotc.com")
+    input.input(type="text", name="email" placeholder="jace@wotc.com", value=values.email)
   br
   .control
     i.fa.fa-phone-alt
-    input.input(type="text", name="phone-number" placeholder="450-897-3214")
+    input.input(type="text", name="phone" placeholder="450-897-3214", value=values.phone)
   br
   .control
     i.fa.fa-user.ml-1
-    input.input(type="text", name="username", placeholder="JaceTheBoogeyMan987")
+    input.input(type="text", name="username", placeholder="JaceTheBoogeyMan987", value=values.email)
   br
   .control
     i.fa.fa-fingerprint.ml-1

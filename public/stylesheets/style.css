@@ -7,6 +7,7 @@
     --main-yellow: #eae374;
     --main-red: #ec4c4c;
     --main-green: #abcbac;
+    --accent-green: #83c486;
     --main-orange: #ec8454;
     --accent-orange: #eca864;
     --main-purple: #5c80d0;
@@ -64,4 +65,21 @@ body {
     color: var(--white);
     background-color: var(--main-purple);
     outline-color: var(--main-blue);
+}
+
+.error-outline {
+    border: 0.15em solid var(--main-red);
+}
+
+.error-red {
+    color: var(--main-red);
+}
+
+
+.success-outline {
+    border: 0.15em solid var(--accent-green);
+}
+
+.success-green {
+    color: var(--accent-green);
 }

@@ -2,10 +2,10 @@
 
 class User
 {
-    private String $firstname;
-    private String $lastname;
-    private String $username;
-    private String $email;
-    private String $phone;
-    private String $password;
+    public String $firstname;
+    public String $lastname;
+    public String $username;
+    public String $email;
+    public String $phone;
+    public String $password;
 }

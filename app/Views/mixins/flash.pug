@@ -1,0 +1,15 @@
+mixin flashBox()
+  if (flashBox == "isError")
+    .base-margin.base-padding.box.error-outline
+      .column
+        .fas.fa-times.error-red
+      .column
+        +flash
+
+  if (flashBox == "isSuccess")
+    .base-margin.base-padding.box.success-outline
+      .columns
+        .column
+          .fas.fa-check.success-green
+        .column
+          +flash

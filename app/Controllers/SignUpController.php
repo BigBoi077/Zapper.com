@@ -48,8 +48,8 @@ class SignUpController extends BaseController
         $broker = new SignUpBroker();
         $user = $this->setUserValues($form);
         $broker->insert($user);
-        Flash::success("Your account was created successfully!");
         $this->setUserSessionInformation($user);
+        Flash::success("Your account was created successfully!");
         Session::getInstance()->set("isLogged", true);
         return $user;
     }

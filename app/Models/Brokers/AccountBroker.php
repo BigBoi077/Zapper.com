@@ -12,4 +12,11 @@ class AccountBroker extends Broker
         $result = $this->selectSingle($sql, [$id]);
         return new User($result);
     }
+
+    public function getByUsername(string $username): User
+    {
+        $sql = Queries::getUserByUsername($username);
+        $result = $this->selectSingle($sql, [$username]);
+        return new User($result);
+    }
 }

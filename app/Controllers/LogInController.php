@@ -3,6 +3,7 @@
 use Models\Brokers\AccountBroker;
 use Models\Classes\FormValidator;
 use Zephyrus\Application\Flash;
+use Zephyrus\Application\Session;
 use Zephyrus\Network\Response;
 
 class LogInController extends BaseController
@@ -11,7 +12,7 @@ class LogInController extends BaseController
     {
         $this->get("/", "index");
         $this->post("/", "connect");
-        $this->post("Connexion/Logout", "logout");
+        $this->get("/Connexion/Logout", "logout");
     }
 
     public function index(): Response
@@ -34,9 +35,14 @@ class LogInController extends BaseController
             Flash::error("Wrong credentials");
             return $this->redirect("/Connexion/Register");
         } else {
-            $user =
             $this->setUserSessionInformation($user);
             return $this->redirect("/General/Main");
         }
+    }
+
+    public function logout(): Response
+    {
+        Session::getInstance()->destroy();
+        return $this->redirect("/");
     }
 }

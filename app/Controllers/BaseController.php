@@ -8,7 +8,6 @@ use Zephyrus\Network\Router;
 
 abstract class BaseController extends SecurityController
 {
-    private const DEFAULT_VALUE = "Default";
     protected MenuHeader $menu;
 
     public function __construct(Router $router)
@@ -26,14 +25,6 @@ abstract class BaseController extends SecurityController
         return parent::before();
     }
 
-    /**
-     * Override example of the render method to automatically include arguments to be sent to any views for any
-     * Controller class extending this middleware. Useful for global data used in layout files.
-     *
-     * @param string $page
-     * @param array $args
-     * @return Response
-     */
     public function render($page, $args = []): Response
     {
         return parent::render($page, array_merge($args, [
@@ -44,14 +35,6 @@ abstract class BaseController extends SecurityController
     public function isLogged(): bool
     {
         return Session::getInstance()->read("isLogged", false);
-    }
-
-    public function getSessionValue(string $value): string
-    {
-        if (Session::getInstance()->has($value)) {
-            return Session::getInstance()->read($value);
-        }
-        return self::DEFAULT_VALUE;
     }
 
     public function setUserSessionInformation(User $user)

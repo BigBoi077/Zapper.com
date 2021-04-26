@@ -3,6 +3,7 @@
 use Models\Brokers\SignUpBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
+use Zephyrus\Security\Cryptography;
 
 class FormValidator
 {
@@ -25,5 +26,15 @@ class FormValidator
             $broker = new SignUpBroker();
             return !$broker->usernameTaken($value);
         }, "Username is already taken"));
+    }
+
+    public function isUserValid(User $user, Form $form): bool
+    {
+        if (!isset($user->password)) {
+            return false;
+        }
+        $clearTextPassword = $form->getValue("password");
+        return !(Cryptography::verifyHashedPassword($clearTextPassword, $user->password)
+            && strcmp($form->getValue("username"), $user->username));
     }
 }

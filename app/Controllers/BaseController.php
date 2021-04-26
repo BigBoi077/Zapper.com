@@ -44,5 +44,6 @@ abstract class BaseController extends SecurityController
         Session::getInstance()->set("username", $user->username);
         Session::getInstance()->set("email", $user->email);
         Session::getInstance()->set("phone", $user->phone);
+        Session::getInstance()->set("isLogged", true);
     }
 }

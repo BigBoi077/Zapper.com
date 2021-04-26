@@ -21,5 +21,6 @@ class User
         $this->username = $result->username;
         $this->email = $result->email;
         $this->phone = $result->phone;
+        $this->password = $result->password;
     }
 }

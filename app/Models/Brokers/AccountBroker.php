@@ -2,7 +2,6 @@
 
 use Models\Classes\Queries;
 use Models\Classes\User;
-use Zephyrus\Application\Session;
 
 class AccountBroker extends Broker
 {

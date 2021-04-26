@@ -31,9 +31,9 @@ class LogInController extends BaseController
         $broker = new AccountBroker();
         $user = $broker->getByUsername($form->getValue("username"));
         $validator = new FormValidator($form);
-        if ($validator->same) {
+        if (!$validator->isUserValid($user, $form)) {
             Flash::error("Wrong credentials");
-            return $this->redirect("/Connexion/Register");
+            return $this->redirect("/");
         } else {
             $this->setUserSessionInformation($user);
             return $this->redirect("/General/Main");

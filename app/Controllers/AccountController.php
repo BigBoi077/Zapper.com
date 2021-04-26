@@ -3,7 +3,7 @@
 use Models\Classes\MenuHeader;
 use \Zephyrus\Application\Session;
 
-class AccountController extends SecurityController
+class AccountController extends BaseController
 {
     private MenuHeader $menu;
 

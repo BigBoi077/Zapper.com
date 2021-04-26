@@ -1,15 +1,16 @@
 mixin flashBox()
   if (flashBox == "isError")
     .base-margin.base-padding.box.error-outline
-      .column.flex-end
-        .fas.fa-times.error-red
-      .column.is-8
-        +flash
+      .columns.is-vcentered
+        .column.flex-end
+          .fas.fa-times.error-red
+        .column.is-9
+          +flash
 
   if (flashBox == "isSuccess")
     .base-margin.base-padding.box.success-outline
-      .columns
+      .columns.is-vcentered
         .column.flex-end
           .fas.fa-check.success-green
-        .column.is-8
+        .column.is-9
           +flash

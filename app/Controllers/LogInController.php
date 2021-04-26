@@ -1,8 +1,9 @@
 <?php namespace Controllers;
 
 use Models\Classes\MenuHeader;
+use Zephyrus\Network\Response;
 
-class LogInController extends SecurityController
+class LogInController extends BaseController
 {
 
     private MenuHeader $menu;
@@ -12,12 +13,19 @@ class LogInController extends SecurityController
         $this->menu = new MenuHeader();
         $this->get("/", "index");
         $this->get("/Connexion/Login", "index");
+        $this->post("/Connexion/Login", "connect");
     }
 
-    public function index() {
+    public function index(): Response
+    {
         return $this->render("/connexion/login", [
             'menuItems' => $this->menu->build(),
             'currentPage' => "Login"
         ]);
+    }
+
+    public function connect()
+    {
+
     }
 }

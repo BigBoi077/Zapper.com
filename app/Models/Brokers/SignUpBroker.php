@@ -2,11 +2,10 @@
 
 use Models\Classes\Queries;
 use Models\Classes\User;
-use stdClass;
 
 class SignUpBroker extends Broker
 {
-    function insert(User $user): ?stdClass
+    function insert(User $user)
     {
         $sql = Queries::getUserInsertQuery();
         $this->query($sql, [
@@ -17,8 +16,16 @@ class SignUpBroker extends Broker
             $user->phone,
             $user->password
         ]);
-        $sql = Queries::getLastInsertQuery();
-        var_dump($this->selectSingle($sql));
-        $user->id = strval($this->selectSingle($sql)['currval']);
+        $sql = Queries::getUserByUsername($user->username);
+        $user->id = $this->selectSingle($sql, [$user->username])->id;
+    }
+
+    function usernameTaken(string $username): bool
+    {
+        $sql = Queries::getUsernameExistQuery($username);
+        if (is_null($this->selectSingle($sql, [$username]))) {
+            return false;
+        }
+        return true;
     }
 }

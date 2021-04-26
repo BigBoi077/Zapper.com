@@ -1,8 +1,10 @@
 <?php namespace Controllers;
 
+use Models\Brokers\AccountBroker;
 use Models\Classes\MenuHeader;
+use Zephyrus\Application\Session;
 
-class MainController extends SecurityController
+class MainController extends BaseController
 {
     private MenuHeader $menu;
 
@@ -14,6 +16,10 @@ class MainController extends SecurityController
 
     public function index()
     {
+        $broker = new AccountBroker();
+        if (Session::getInstance()->has("id")) {
+            $user = $broker->getById(Session::getInstance()->read("id"));
+        }
         return $this->render("/main/main", [
             'menuItems' => $this->menu->build(),
             'currentPage' => "Websites",

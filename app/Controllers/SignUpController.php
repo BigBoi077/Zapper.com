@@ -8,8 +8,9 @@ use Models\Classes\User;
 use Models\Classes\Password;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Session;
+use Zephyrus\Security\Cryptography;
 
-class SignUpController extends SecurityController
+class SignUpController extends BaseController
 {
     private MenuHeader $menu;
     private const emptyArray = [ 'firstname' => '', 'lastname' => '', 'username' => '', 'phone' => '', 'email' => '' ];
@@ -31,14 +32,16 @@ class SignUpController extends SecurityController
         ]);
     }
 
-    public function insert()
+    public function insert(): \Zephyrus\Network\Response
     {
         $form = $this->buildForm();
         $validator = new FormValidator();
         $validator->validateSignUpRules($form);
-        if (!$form->verify()) {
-            $errors = $form->getErrorMessages();
-            Flash::error($errors);
+        if ($this->userExists($form->getValue('username'))) {
+            Flash::error("Username is already taken");
+            if (!$form->verify()) {
+                Flash::error($form->getErrorMessages());
+            }
             return $this->render("/connexion/sign-up", [
                 'menuItems' => $this->menu->build(),
                 'currentPage' => "Sign up",
@@ -47,6 +50,7 @@ class SignUpController extends SecurityController
             ]);
         } else {
             $user = $this->createUser($form);
+            $this->setUserSessionInformation($user);
             return $this->render("/main/main", [
                 'menuItems' => $this->menu->build(),
                 'currentPage' => "Websites",
@@ -54,6 +58,12 @@ class SignUpController extends SecurityController
                 'username' => $user->username
             ]);
         }
+    }
+
+    private function userExists(string $username): bool
+    {
+        $broker = new SignUpBroker();
+        return $broker->usernameTaken($username);
     }
 
     private function createUser(Form $form): User
@@ -76,17 +86,7 @@ class SignUpController extends SecurityController
         $user->lastname = $form->getValue("lastname");
         $user->phone = $form->getValue("phone");
         $user->email = $form->getValue("email");
-        $user->password = Password::hash($form->getValue("firstname"));
+        $user->password = Cryptography::hashPassword($form->getValue("password"));
         return $user;
-    }
-
-    private function returnToSignUp(Form $form)
-    {
-        return $this->render("/connexion/sign-up", [
-            'menuItems' => $this->menu->build(),
-            'currentPage' => "Sign up",
-            'values' => $form->getFields(),
-            'flashBox' => "isError"
-        ]);
     }
 }

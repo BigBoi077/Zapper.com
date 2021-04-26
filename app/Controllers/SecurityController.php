@@ -1,5 +1,6 @@
 <?php namespace Controllers;
 
+use Zephyrus\Application\Session;
 use Zephyrus\Exceptions\IntrusionDetectionException;
 use Zephyrus\Exceptions\InvalidCsrfException;
 use Zephyrus\Exceptions\UnauthorizedAccessException;

@@ -34,32 +34,34 @@ class SignUpController extends SecurityController
     {
         $form = $this->buildForm();
         $validator = new FormValidator();
-        $validator->checkFields($form);
+        $validator->validateSignUpRules($form);
         if (!$form->verify()) {
             $errors = $form->getErrorMessages();
             Flash::error($errors);
             return $this->render("/connexion/sign-up", [
                 'menuItems' => $this->menu->build(),
                 'currentPage' => "Sign up",
-                'values' => self::emptyArray,
+                'values' => $form->getFields(),
                 'flashBox' => "isError"
             ]);
+        } else {
+            $user = $this->createUser($form);
+            return $this->render("/main/main", [
+                'menuItems' => $this->menu->build(),
+                'currentPage' => "Websites",
+                'flashBox' => "isSuccess",
+                'username' => $user->username
+            ]);
         }
-        $this->createUser($form);
-        return $this->render("/main/main", [
-            'menuItems' => $this->menu->build(),
-            'currentPage' => "Websites",
-            'values' => self::emptyArray,
-            'flashBox' => "isSuccess"
-        ]);
     }
 
-    private function createUser(Form $form)
+    private function createUser(Form $form): User
     {
         $broker = new SignUpBroker();
         $user = $this->setUserValues($form);
         $broker->insert($user);
         Flash::success("Votre compte a été créer avec succès");
+        return $user;
     }
 
     private function setUserValues(Form $form): User
@@ -72,5 +74,15 @@ class SignUpController extends SecurityController
         $user->email = $form->getValue("email");
         $user->password = Password::hash($form->getValue("firstname"));
         return $user;
+    }
+
+    private function returnToSignUp(Form $form)
+    {
+        return $this->render("/connexion/sign-up", [
+            'menuItems' => $this->menu->build(),
+            'currentPage' => "Sign up",
+            'values' => $form->getFields(),
+            'flashBox' => "isError"
+        ]);
     }
 }

@@ -6,7 +6,7 @@ use Zephyrus\Application\Rule;
 class FormValidator
 {
 
-    public function checkFields(Form $form)
+    public function validateSignUpRules(Form $form)
     {
         $form->validate('firstname', Rule::notEmpty(Errors::notEmpty("firstname")));
         $form->validate('lastname', Rule::notEmpty(Errors::notEmpty("lastname")));

@@ -8,7 +8,7 @@ class MenuHeader
     {
         $this->add(new MenuItem("Login", "/Connexion/Login"));
         $this->add(new MenuItem("Register", "/Connexion/Register"));
-        $this->add(new MenuItem("Websites", "/General/Login"));
+        $this->add(new MenuItem("Websites", "/General/Main"));
         $this->add(new MenuItem("Account", "/Personal/Account"));
         return $this->menuItems;
     }

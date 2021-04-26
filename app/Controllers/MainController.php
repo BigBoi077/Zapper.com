@@ -9,14 +9,15 @@ class MainController extends SecurityController
     public function initializeRoutes()
     {
         $this->menu = new MenuHeader();
-        $this->get("/Zapper/Main", "index");
+        $this->get("/General/Main", "index");
     }
 
     public function index()
     {
         return $this->render("/main/main", [
             'menuItems' => $this->menu->build(),
-            'currentPage' => "Sign up"
+            'currentPage' => "Websites",
+            'flashBox' => "empty",
         ]);
     }
 }

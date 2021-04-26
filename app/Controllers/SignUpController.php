@@ -2,9 +2,9 @@
 
 use Models\Brokers\SignUpBroker;
 use Models\Classes\FormValidator;
-use \Zephyrus\Network\Response;
-use Zephyrus\Application\Flash;
 use Models\Classes\User;
+use Zephyrus\Network\Response;
+use Zephyrus\Application\Flash;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Session;
 use Zephyrus\Security\Cryptography;
@@ -21,6 +21,9 @@ class SignUpController extends BaseController
 
     public function index(): Response
     {
+        if ($this->isLogged()) {
+            return $this->redirect("/General/Main");
+        }
         return $this->render("/connexion/sign-up", [
             'currentPage' => "Sign up",
             'values' => self::emptyArray,

@@ -1,7 +1,7 @@
 .columns.is-vcentered
 	.column.header-title
 		h1 Zapper
-	.column.flex-end
+	.column.flex-end.mt-5
 		nav.navbar
 			.navbar-brand
 				nav.navbar(role='navigation' aria-label='main navigation')
@@ -18,9 +18,8 @@
 		nav.breadcrumb.has-bullet-separator.is-hidden-touch(aria-label="breadcrumbs")
 			ul
 				each item in menuItems
-					if item.name === currentPage
-						li.is-active
-							a.breadcrumb-elem(href=item.href)=item.name
-					else
-						li
-							a.breadcrumb-elem(href=item.href)=item.name
+					li
+						a.no-style.breadcrumb-elem(href=item.href)=item.name
+				li
+					block logout
+

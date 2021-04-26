@@ -12,6 +12,7 @@
     --accent-orange: #eca864;
     --main-purple: #5c80d0;
     --white: #e7e7e7;
+    --black: #2d2c2c;
     --small-padding: 1em;
     --medium-padding: 3em;
     --small-margin: 1em;
@@ -82,4 +83,12 @@ body {
 
 .success-green {
     color: var(--accent-green);
+}
+
+.no-style {
+    color: var(--black)!important;
+}
+
+.logout-button {
+    margin: 0.45em!important;
 }

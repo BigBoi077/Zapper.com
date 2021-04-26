@@ -30,8 +30,8 @@ class SignUpController extends BaseController
     public function insert(): Response
     {
         $form = $this->buildForm();
-        $validator = new FormValidator();
-        $validator->validateSignUpRules($form);
+        $validator = new FormValidator($form);
+        $validator->validateSignUpRules();
 
         if (!$form->verify()) {
             Flash::error($form->getErrorMessages());
@@ -56,7 +56,7 @@ class SignUpController extends BaseController
 
     private function setUserValues(Form $form): User
     {
-        $user = new User($form);
+        $user = new User();
         $user->username = $form->getValue("username");
         $user->firstname = $form->getValue("firstname");
         $user->lastname = $form->getValue("lastname");

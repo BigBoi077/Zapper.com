@@ -2,9 +2,7 @@
 
 use Models\Brokers\AccountBroker;
 use Models\Classes\FormValidator;
-use Models\Classes\User;
 use Zephyrus\Application\Flash;
-use Zephyrus\Application\Form;
 use Zephyrus\Network\Response;
 
 class LogInController extends BaseController
@@ -13,6 +11,7 @@ class LogInController extends BaseController
     {
         $this->get("/", "index");
         $this->post("/", "connect");
+        $this->post("Connexion/Logout", "logout");
     }
 
     public function index(): Response
@@ -30,7 +29,7 @@ class LogInController extends BaseController
         $form = $this->buildForm();
         $broker = new AccountBroker();
         $user = $broker->getByUsername($form->getValue("username"));
-        $validator = new FormValidator();
+        $validator = new FormValidator($form);
         if ($validator->same) {
             Flash::error("Wrong credentials");
             return $this->redirect("/Connexion/Register");

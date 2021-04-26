@@ -6,6 +6,10 @@
 mixin title(message)
   h1.welcome.mt-6.has-text-centered=message
 
+mixin logoutButton(href)
+  a(href=href)
+    .fas.fa-power-off.error-red
+
 mixin flash()
   if flash.success
     .base-margin.base-padding.box.success-outline

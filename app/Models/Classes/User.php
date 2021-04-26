@@ -10,8 +10,11 @@ class User
     public String $phone;
     public String $password;
 
-    public function __construct(\stdClass $result)
+    public function __construct(\stdClass $result = null)
     {
+        if (is_null($result)) {
+            return;
+        }
         $this->id = $result->id;
         $this->lastname = $result->lastname;
         $this->firstname = $result->firstname;

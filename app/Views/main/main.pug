@@ -3,5 +3,8 @@ extends ../layout
 block content
   +title("Here you can manage you own personal passwords for different services.")
 
+block logout
+  +logoutButton("/Connexion/Logout")
+
 block scripts
   include ../components/scripts

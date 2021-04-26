@@ -3,8 +3,22 @@
   to work with list of messages and single message. Compliant with standard messaging level (error,
   success, warning, notice and info).
 mixin flash()
-  +flash-message(flash.success, 'success')
-  +flash-message(flash.error, 'danger')
+  if flash.success
+    .base-margin.base-padding.box.success-outline
+      .columns.is-vcentered
+        .column.flex-end
+          .fas.fa-check.success-green
+        .column.is-9
+          +flash-message(flash.success, 'success')
+
+  if flash.error
+    .base-margin.base-padding.box.error-outline
+      .columns.is-vcentered
+        .column.flex-end
+          .fas.fa-times.error-red
+        .column.is-9
+          +flash-message(flash.error, 'danger')
+
   +flash-message(flash.warning, 'warning')
   +flash-message(flash.notice, 'notice')
   +flash-message(flash.info, 'info')

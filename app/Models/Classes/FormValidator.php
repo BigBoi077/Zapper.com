@@ -1,11 +1,11 @@
 <?php namespace Models\Classes;
 
+use Models\Brokers\SignUpBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
 
 class FormValidator
 {
-
     public function validateSignUpRules(Form $form)
     {
         $form->validate('firstname', Rule::notEmpty(Errors::notEmpty("firstname")));
@@ -14,5 +14,9 @@ class FormValidator
         $form->validate('phone', Rule::phone(Errors::incorrectFormat("phone")));
         $form->validate('username', Rule::regex(Regex::$username, "A username must be between 5 to 31 characters, have at least a capital letter and a number"));
         $form->validate('password', Rule::passwordCompliant("A password must be a least 8 characters, have at least a capital letter, a number and a symbol"));
+        $form->validateWhenFieldHasNoError('username', new Rule(function ($value) {
+            $broker = new SignUpBroker();
+            return !$broker->usernameTaken($value);
+        }, "Username is already taken"));
     }
 }

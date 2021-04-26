@@ -6,7 +6,7 @@ class MenuHeader
 
     public function build(): array
     {
-        $this->add(new MenuItem("Login", "/Connexion/Login"));
+        $this->add(new MenuItem("Login", "/"));
         $this->add(new MenuItem("Register", "/Connexion/Register"));
         $this->add(new MenuItem("Websites", "/General/Main"));
         $this->add(new MenuItem("Account", "/Personal/Account"));

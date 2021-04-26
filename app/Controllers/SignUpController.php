@@ -7,6 +7,7 @@ use Zephyrus\Application\Flash;
 use Models\Classes\User;
 use Models\Classes\Password;
 use Zephyrus\Application\Form;
+use Zephyrus\Application\Session;
 
 class SignUpController extends SecurityController
 {
@@ -60,7 +61,10 @@ class SignUpController extends SecurityController
         $broker = new SignUpBroker();
         $user = $this->setUserValues($form);
         $broker->insert($user);
-        Flash::success("Votre compte a été créer avec succès");
+        Flash::success("Your account was created successfully!");
+        Session::getInstance()->set("username", $user->username);
+        Session::getInstance()->set("id", $user->id);
+        Session::getInstance()->set("isLogged", true);
         return $user;
     }
 

@@ -2,6 +2,7 @@
 
 class User
 {
+    public String $id;
     public String $firstname;
     public String $lastname;
     public String $username;

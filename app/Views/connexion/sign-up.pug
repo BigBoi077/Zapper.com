@@ -1,8 +1,8 @@
 extends ../layout
 
 block content
-  hr
-  h1.welcome.mt-6.has-text-centered Simply enter your information below to create an account
+  +flash
+  +title("Simply enter your information below to create an account")
   include ../components/signUpForm
 
 block scripts

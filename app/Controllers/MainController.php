@@ -15,9 +15,7 @@ class MainController extends BaseController
     public function index(): Response
     {
         $broker = new AccountBroker();
-        if (Session::getInstance()->has("id")) {
-            $user = $broker->getById(Session::getInstance()->read("id"));
-        }
+        $user = $broker->getById(sess("id"));
         return $this->render("/main/main", [
             'user' => $user,
             'currentPage' => "Websites",

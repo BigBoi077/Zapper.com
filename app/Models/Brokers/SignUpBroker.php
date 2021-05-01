@@ -16,13 +16,13 @@ class SignUpBroker extends Broker
             $user->phone,
             $user->password
         ]);
-        $sql = Queries::getUserByUsername($user->username);
+        $sql = Queries::getUserByUsernameQuery();
         $user->id = $this->selectSingle($sql, [$user->username])->id;
     }
 
     function usernameTaken(string $username): bool
     {
-        $sql = Queries::getUsernameExistQuery($username);
+        $sql = Queries::getUsernameExistQuery();
         if (is_null($this->selectSingle($sql, [$username]))) {
             return false;
         }

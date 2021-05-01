@@ -1,6 +1,8 @@
 <?php namespace Controllers;
 
 use Models\Brokers\AccountBroker;
+use Models\Brokers\TokenBroker;
+use Models\Classes\CookieBuilder;
 use Models\Classes\FormValidator;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Session;
@@ -17,7 +19,7 @@ class LogInController extends BaseController
 
     public function index(): Response
     {
-        if ($this->isLogged()) {
+        if (!$this->isLogged()) {
             return $this->redirect("/General/Main");
         }
         return $this->render("/connexion/login", [
@@ -27,8 +29,8 @@ class LogInController extends BaseController
 
     public function connect(): Response
     {
-        $form = $this->buildForm();
         $broker = new AccountBroker();
+        $form = $this->buildForm();
         $user = $broker->getByUsername($form->getValue("username"));
         $validator = new FormValidator($form);
         if (!$validator->isUserValid($user, $form)) {
@@ -36,13 +38,21 @@ class LogInController extends BaseController
             return $this->redirect("/");
         } else {
             $this->setUserSessionInformation($user);
+            if ($form->getValue("remember-me") == "on") {
+                $tokenBroker = new TokenBroker();
+                $value = $tokenBroker->insert(sess("id"));
+                CookieBuilder::build(self::REMEMBER_ME, $value);
+            }
             return $this->redirect("/General/Main");
         }
     }
 
     public function logout(): Response
     {
+        $broker = new TokenBroker();
+        $broker->deleteUserToken(sess("id"));
         Session::getInstance()->destroy();
+        CookieBuilder::destroy(self::REMEMBER_ME);
         return $this->redirect("/");
     }
 }

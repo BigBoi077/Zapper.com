@@ -19,7 +19,10 @@ class LogInController extends BaseController
 
     public function index(): Response
     {
-        if ($this->isLogged()) {
+        if (!$this->isLogged() && $this->hasRememberMeToken()) {
+            return $this->redirect("/General/Main");
+        }
+        if ($this->isLogged() && !$this->hasRememberMeToken()) {
             return $this->redirect("/General/Main");
         }
         return $this->render("/connexion/login", [

@@ -28,4 +28,11 @@ class TokenBroker extends Broker
         }
         return true;
     }
+
+    public function getUserIdByToken(string $tokenValue): int
+    {
+        $sql = Queries::getUserIdByToken();
+        $result = $this->selectSingle($sql, [$tokenValue]);
+        return $result->id_user;
+    }
 }

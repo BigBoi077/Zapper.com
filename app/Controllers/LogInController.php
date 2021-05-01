@@ -19,7 +19,7 @@ class LogInController extends BaseController
 
     public function index(): Response
     {
-        if (!$this->isLogged()) {
+        if ($this->isLogged()) {
             return $this->redirect("/General/Main");
         }
         return $this->render("/connexion/login", [
@@ -51,8 +51,8 @@ class LogInController extends BaseController
     {
         $broker = new TokenBroker();
         $broker->deleteUserToken(sess("id"));
-        Session::getInstance()->destroy();
         CookieBuilder::destroy(self::REMEMBER_ME);
+        Session::getInstance()->destroy();
         return $this->redirect("/");
     }
 }

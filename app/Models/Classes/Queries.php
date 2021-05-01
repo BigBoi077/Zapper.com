@@ -47,4 +47,11 @@ class Queries
                 FROM \"token\"
                 WHERE value = ?";
     }
+
+    public static function getUserIdByToken(): string
+    {
+        return "SELECT id_user
+                FROM token
+                WHERE value = ?";
+    }
 }

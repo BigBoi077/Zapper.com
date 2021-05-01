@@ -1,0 +1,18 @@
+include ./form
+
+mixin title(message)
+    h1.welcome.mt-6.has-text-centered=message
+
+mixin logoutButton(href)
+    a(href=href)
+        .fas.fa-power-off.error-red.logout-button
+
+mixin serviceRow(service)
+    form
+        .columns
+            .column
+                h1=service.title
+                img(src=service.imagePath)
+            .column
+                .columns
+                    +input

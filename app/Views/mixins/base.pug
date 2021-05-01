@@ -3,13 +3,6 @@
   to work with list of messages and single message. Compliant with standard messaging level (error,
   success, warning, notice and info).
 
-mixin title(message)
-  h1.welcome.mt-6.has-text-centered=message
-
-mixin logoutButton(href)
-  a(href=href)
-    .fas.fa-power-off.error-red.logout-button
-
 mixin flash()
   if flash.success
     .base-margin.base-padding.box.success-outline

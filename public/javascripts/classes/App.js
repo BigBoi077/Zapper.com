@@ -22,5 +22,8 @@ export class App {
 
     placeEvents() {
         this.eventPlacer.placePasswordRevealEvent();
+        this.eventPlacer.placeModifyServiceEvent();
+        this.eventPlacer.placeDeleteServiceEvent();
+        this.eventPlacer.placeCloseModalEvents();
     }
 }

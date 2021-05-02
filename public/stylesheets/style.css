@@ -86,3 +86,7 @@ body {
     height: 4em;
     width: auto;
 }
+
+.hover-success:hover {
+    border: 1px solid var(--accent-green);
+}

@@ -10,7 +10,7 @@ block content
   .box.mt-4
     form(action="" method="post")
       .columns.is-vcentered
-        .column.is-2
+        .column.is-2.flex
           img.service-icon(src="/assets/images/service/netflix.png")
         .column.is-10
           .columns.is-vcentered
@@ -71,12 +71,15 @@ block content
         button.delete(aria-label='close' data-close-modal)
       section.modal-card-body
         form
-          h1.title-medium Here are some of the service we offer
-          .select.is-rounded.mb-2.mt-2
-            select(name="services")
-              option(value="netflix") Netflix
-              option(value="pinterest") Pinterest
-              option(value="instagram") Instagram
+          .columns
+            .column.is-8
+              h1.title-medium.mt-2 Here are some of the services we support
+            .column.is-4.flex
+              .select.is-rounded
+                select(name="services")
+                  option(value="netflix") Netflix
+                  option(value="pinterest") Pinterest
+                  option(value="instagram") Instagram
           .columns.is-vcentered
             .column
               .form-group

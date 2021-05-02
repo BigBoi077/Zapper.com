@@ -1,7 +1,10 @@
+import {EventPlacer} from "./EventPlacer.js";
+
 export class App {
 
     constructor() {
         this.hideBurgerMenu();
+        this.eventPlacer = new EventPlacer();
     }
 
     revealContent() {
@@ -11,13 +14,13 @@ export class App {
     hideBurgerMenu() {
         const menu = document.getElementsByClassName('burger');
         const navigation = document.getElementById("items");
-
-        console.log(menu)
-        console.log(navigation)
-
         $(menu).click( function () {
             menu[0].classList.toggle('is-active');
             navigation.classList.toggle('is-active');
         });
+    }
+
+    placeEvents() {
+        this.eventPlacer.placePasswordRevealEvent();
     }
 }

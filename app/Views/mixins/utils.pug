@@ -1,7 +1,7 @@
 include ./form
 
 mixin title(message)
-    h1.welcome.mt-6.has-text-centered=message
+    h1.welcome.mt-4.mb-0.has-text-centered=message
 
 mixin logoutButton(href)
     a(href=href)
@@ -16,3 +16,16 @@ mixin serviceRow(service)
             .column
                 .columns
                     +input
+
+mixin changeModal(modalName)
+    .modal(data-modal-name=modalName)
+        .modal-background
+        .modal-card
+            header.modal-card-head
+                p.modal-card-title Change credentials
+                button.delete(aria-label='close')
+            section.modal-card-body
+                // Content ...
+            footer.modal-card-foot
+                button.button.success-green Save changes
+                button.button.error-red Cancel

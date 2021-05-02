@@ -1,0 +1,23 @@
+.error-outline {
+    border: 0.15em solid var(--main-red);
+}
+
+.error-red {
+    color: var(--main-red);
+}
+
+.success-outline {
+    border: 0.15em solid var(--accent-green);
+}
+
+.success-green {
+    color: var(--accent-green);
+}
+
+.no-style {
+    color: var(--black)!important;
+}
+
+.is-orange {
+    color: var(--main-orange);
+}

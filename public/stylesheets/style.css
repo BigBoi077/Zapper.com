@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:wght@300&display=swap');
 @import "vendor/bulma.min.css";
 @import "vendor/fontawesome.min.css";
+@import "colors.css";
 
 :root {
     --main-blue: #34b4cc;
@@ -21,7 +22,7 @@
 
 body {
     font-size: 100%;
-    font-family: Exo;
+    font-family: Exo, serif;
 }
 
 .header-title {
@@ -68,27 +69,20 @@ body {
     outline-color: var(--main-blue);
 }
 
-.error-outline {
-    border: 0.15em solid var(--main-red);
-}
-
-.error-red {
-    color: var(--main-red);
-}
-
-
-.success-outline {
-    border: 0.15em solid var(--accent-green);
-}
-
-.success-green {
-    color: var(--accent-green);
-}
-
-.no-style {
-    color: var(--black)!important;
-}
-
 .logout-button {
     margin: 0.45em!important;
+}
+
+.service-title {
+    font-size: 2em;
+}
+
+.service-icon {
+    height: 6em;
+    width: auto;
+}
+
+.size-medium {
+    height: 4em;
+    width: auto;
 }

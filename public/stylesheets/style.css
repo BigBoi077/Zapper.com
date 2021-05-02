@@ -87,6 +87,10 @@ body {
     width: auto;
 }
 
+.title-medium {
+    font-size: 1.25em;
+}
+
 .hover-success:hover {
     border: 1px solid var(--accent-green);
 }

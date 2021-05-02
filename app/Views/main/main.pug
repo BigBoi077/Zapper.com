@@ -70,36 +70,39 @@ block content
         p.modal-card-title Add new service
         button.delete(aria-label='close' data-close-modal)
       section.modal-card-body
-        h1 Here are some of the service we offer
-        select(name="services")
-          option(value="netflix") Netflix
-          option(value="pinterest") Pinterest
-          option(value="instagram") Instagram
-        .columns.is-vcentered
-          .column.is-5
-            .form-group
-              .field
-                .fas.fa-user-alt
-                .control
-                  input.input(name="username" type='text' value="josh")
-          .column.is-5
-            .form-group
-              form-group
+        form
+          h1.title-medium Here are some of the service we offer
+          .select.is-rounded.mb-2.mt-2
+            select(name="services")
+              option(value="netflix") Netflix
+              option(value="pinterest") Pinterest
+              option(value="instagram") Instagram
+          .columns.is-vcentered
+            .column
+              .form-group
                 .field
-                  .fas.fa-fingerprint
+                  label.label User
                   .control
-                    input.input(data-password-box="netflix" name="password" type='password' value="piss")
+                    input.input(name="username" type='text')
+            .column
+              .form-group
+                form-group
+                  .field
+                    label.label Password
+                    .control
+                      input.input(name="password" type='password')
       footer.modal-card-foot
-        button.button.error-red(type="submit") Register
+        button.button.hover-success(type="submit") Add
         button.button(data-close-modal) Cancel
 
-  div#addService
-    .columns.mb-1
-      .column.flex
-        h1.subtitle Add service
-    .columns
-      .column.flex.size-medium
-        .fas.fa-plus-circle.fa-lg.success-green
+  a
+    div#addService
+      .columns.mb-1
+        .column.flex
+          h1.subtitle Add service
+      .columns
+        .column.flex.size-medium
+          .fas.fa-plus-circle.fa-lg.success-green
 
 block scripts
   include ../components/scripts

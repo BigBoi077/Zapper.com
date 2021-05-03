@@ -6,6 +6,7 @@ mixin changerCredentialsSection(user)
                 label.label.ml-1.font-size-medium Personal account
             +namesRow(user.firstname, user.lastname)
             +emailRow(user.email)
+            +phoneRow(user.phone)
             button.button.hover-success.mb-3 Change
 
 mixin securitySection()

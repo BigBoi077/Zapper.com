@@ -37,13 +37,13 @@ mixin namesRow(firstname, lastname)
 				.field
 					label.label Firstname
 					.control
-						input.input(name="username" type='text' value=firstname)
+						input.input(name="firstname" type='text' value=firstname)
 		.column
 			.form-group
 				.field
 					label.label Lastname
 					.control
-						input.input(name="password" type='text' value=lastname)
+						input.input(name="lastname" type='text' value=lastname)
 
 mixin emailRow(email)
 	.columns
@@ -53,3 +53,12 @@ mixin emailRow(email)
 					label.label Email
 					.control
 						input.input(name="email" type="text" value=email)
+
+mixin phoneRow(phone)
+	.columns
+		.column
+			.form-group
+				.field
+					label.label Phone
+					.control
+						input.input(name="phone" type="text" value=phone)

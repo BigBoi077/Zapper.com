@@ -18,4 +18,16 @@ class AccountBroker extends Broker
         $result = $this->selectSingle($sql, [$username]);
         return new User($result);
     }
+
+    public function update(User $user)
+    {
+        $sql = Queries::getUserUpdateQuery();
+        $this->query($sql, [
+            $user->firstname,
+            $user->lastname,
+            $user->username,
+            $user->email,
+            $user->phone,
+            $user->id]);
+    }
 }

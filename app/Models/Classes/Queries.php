@@ -61,4 +61,11 @@ class Queries
                 FROM \"token\"
                 WHERE id_user = ?";
     }
+
+    public static function getUserUpdateQuery(): string
+    {
+        return "UPDATE \"user\"
+                SET firstname = ?, lastname = ?, username = ?, email = ?, phone = ?
+                WHERE id = ?";
+    }
 }

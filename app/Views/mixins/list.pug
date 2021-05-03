@@ -1,0 +1,17 @@
+mixin deviceList()
+    .box
+        .columns.ml-1.mt-3.mb-3
+            .fas.fa-desktop.mt-1.mt-2
+            label.label.ml-1.font-size-medium Connected devices
+        .columns
+            .column
+                label.label.ml-1 Device
+            .column
+                label.label.ml-1 Date
+        hr.mt-0.mb-2
+        each token in tokens
+            .columns
+                .column
+                    p=token.device
+                .column
+                    p=token.time

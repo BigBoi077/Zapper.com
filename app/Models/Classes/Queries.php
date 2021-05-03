@@ -31,8 +31,8 @@ class Queries
 
     public static function getTokenInsertQuery(): string
     {
-        return "INSERT INTO \"token\" (id_user, value) 
-                VALUES (?, ?)";
+        return "INSERT INTO \"token\" (id_user, value, device, time) 
+                VALUES (?, ?, ?, ?)";
     }
 
     public static function getTokenDeleteQuery(): string
@@ -53,5 +53,12 @@ class Queries
         return "SELECT id_user
                 FROM token
                 WHERE value = ?";
+    }
+
+    public static function getTokensByIdQuery(): string
+    {
+        return "SELECT *
+                FROM \"token\"
+                WHERE id_user = ?";
     }
 }

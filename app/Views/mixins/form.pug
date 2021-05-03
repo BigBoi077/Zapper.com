@@ -14,3 +14,42 @@ mixin genders()
 		label(class="radio")
 			input(type="radio", name="gender", value="other")
 			i.fa.fa-transgender-alt.ml-2.mr-4s
+
+mixin usernamePasswordRow()
+	.columns.is-vcentered
+		.column
+			.form-group
+				.field
+					label.label Username
+					.control
+						input.input(name="username" type='text')
+		.column
+			.form-group
+				.field
+					label.label Password
+					.control
+						input.input(name="password" type='password')
+
+mixin namesRow(firstname, lastname)
+	.columns.is-vcentered
+		.column
+			.form-group
+				.field
+					label.label Firstname
+					.control
+						input.input(name="username" type='text' value=firstname)
+		.column
+			.form-group
+				.field
+					label.label Lastname
+					.control
+						input.input(name="password" type='text' value=lastname)
+
+mixin emailRow(email)
+	.columns
+		.column
+			.form-group
+				.field
+					label.label Email
+					.control
+						input.input(name="email" type="text" value=email)

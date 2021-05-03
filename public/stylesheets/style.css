@@ -78,7 +78,7 @@ body {
 }
 
 .service-icon {
-    height: 6em;
+    height: 4em;
     width: auto;
 }
 
@@ -93,4 +93,22 @@ body {
 
 .hover-success:hover {
     border: 1px solid var(--accent-green);
+}
+
+.hover-change:hover {
+    border: 1px solid var(--main-blue);
+}
+
+.profile-picture {
+    height: 10em;
+    width: auto;
+    border-radius: 50%;
+}
+
+.security-box {
+    margin: 0.1em;
+}
+
+.font-size-medium {
+    font-size: 1.5em;
 }

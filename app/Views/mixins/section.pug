@@ -1,0 +1,25 @@
+mixin changerCredentialsSection(user)
+    form.mb-5(action="/Personal/Account/Change" method="post")
+        .box
+            .columns.ml-1.mt-3.mb-3
+                .fas.fa-user-astronaut.mt-2
+                label.label.ml-1.font-size-medium Personal account
+            +namesRow(user.firstname, user.lastname)
+            +emailRow(user.email)
+            button.button.hover-success.mb-3 Change
+
+mixin securitySection()
+    .box
+        .columns.ml-1.mt-3.mb-3
+            .fas.fa-shield-alt.mt-1.mt-2
+            label.label.ml-1.font-size-medium Security
+        form.mb-4
+            .columns.security-box
+                .form-group
+                    .field
+                        .control
+                            button.button.mr-2.hover-change Change password
+                .form-group
+                    .field
+                        .control
+                            button.button.mr-2.hover-change Activate two factor authentication

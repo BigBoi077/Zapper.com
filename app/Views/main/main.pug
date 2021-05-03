@@ -11,7 +11,7 @@ block content
     form(action="" method="post")
       .columns.is-vcentered
         .column.is-2.flex
-          img.service-icon(src="/assets/images/service/netflix.png")
+          img.service-icon(src="/assets/images/service/pinterest.png")
         .column.is-10
           .columns.is-vcentered
             .column.is-5
@@ -80,20 +80,7 @@ block content
                   option(value="netflix") Netflix
                   option(value="pinterest") Pinterest
                   option(value="instagram") Instagram
-          .columns.is-vcentered
-            .column
-              .form-group
-                .field
-                  label.label User
-                  .control
-                    input.input(name="username" type='text')
-            .column
-              .form-group
-                form-group
-                  .field
-                    label.label Password
-                    .control
-                      input.input(name="password" type='password')
+          +usernamePasswordRow()
       footer.modal-card-foot
         button.button.hover-success(type="submit") Add
         button.button(data-close-modal) Cancel

@@ -11,7 +11,7 @@ class Service
         if (is_null($result)) {
             return;
         }
-        $this->id = $result->id;
+        $this->id = $result->id_service;
         $this->name = $result->name;
         $this->imagePath = $result->image_path;
     }

@@ -1,17 +1,13 @@
 <?php namespace Models\Brokers;
 
 use Models\Classes\Service;
+use Models\Classes\ServiceUser;
+use Models\Classes\ServiceUserModel;
 use Models\Classes\User;
 use Models\Classes\Queries;
 
 class ServiceBroker extends Broker
 {
-
-    public function addService(User $user, Service $service, string $cryptPassword)
-    {
-        $sql = Queries::getServiceInsertQuery();
-        $this->query($sql, [$user->id, $service->id, $user->username, $cryptPassword]);
-    }
 
     public function getAllService(): array
     {
@@ -19,15 +15,34 @@ class ServiceBroker extends Broker
         return $this->select($sql);
     }
 
-    public function getUserServices(User $user)
+    public function getUserServices(User $user): array
     {
         $sql = Queries::getUserServicesQuery();
+        return $this->select($sql, [$user->id]);
     }
 
     public function serviceExist(string $service): bool
     {
-        $sql = Queries::getServiceExistQuery();
+        $sql = Queries::getServiceByNameQuery();
         $result = $this->selectSingle($sql, [$service]);
         return !is_null($result);
+    }
+
+    public function getServiceByName(string $name): Service
+    {
+        $sql = Queries::getServiceByNameQuery();
+        $result = $this->selectSingle($sql, [$name]);
+        return new Service($result);
+    }
+
+    public function insert(ServiceUser $serviceUser)
+    {
+        $sql = Queries::getServiceUserInsertQuery();
+        $this->query($sql, [
+            $serviceUser->userId,
+            $serviceUser->serviceId,
+            $serviceUser->username,
+            $serviceUser->password
+        ]);
     }
 }

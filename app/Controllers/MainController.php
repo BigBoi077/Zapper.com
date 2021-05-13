@@ -3,6 +3,7 @@
 use Models\Brokers\AccountBroker;
 use Models\Brokers\ServiceBroker;
 use Models\Brokers\TokenBroker;
+use Models\Classes\CookieBuilder;
 use Models\Classes\User;
 use Zephyrus\Network\Response;
 
@@ -24,15 +25,15 @@ class MainController extends BaseController
             $user = $broker->getById(sess("id"));
         } else {
             $tokeBroker = new TokenBroker();
-            $userId = $tokeBroker->getUserIdByToken($_COOKIE[self::REMEMBER_ME]);
+            $userId = $tokeBroker->getUserIdByToken($_COOKIE[CookieBuilder::REMEMBER_ME]);
             $user = $broker->getById($userId);
         }
         $this->setUserSessionInformation($user);
-        //$userServices = $serviceBroker->getUserServices($user);
+        $userServices = $serviceBroker->getUserServices($user);
         return $this->render("/main/main", [
             'user' => $user,
             'services' => $services,
-            //'userServices' => $userServices,
+            'userServices' => $userServices,
             'currentPage' => "Websites",
             'flashBox' => "empty"
         ]);

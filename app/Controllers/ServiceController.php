@@ -6,8 +6,8 @@ use Models\Classes\Errors;
 use Models\Classes\PasswordManager;
 use Models\Classes\User;
 use Zephyrus\Application\Flash;
-use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
+use Zephyrus\Network\Response;
 
 class ServiceController extends BaseController
 {
@@ -20,7 +20,7 @@ class ServiceController extends BaseController
         $this->post("/General/Service/Remove", "remove");
     }
 
-    public function register()
+    public function register(): Response
     {
         $serviceBroker = new ServiceBroker();
         $userBroker = new AccountBroker();
@@ -29,13 +29,14 @@ class ServiceController extends BaseController
         $form = $this->buildForm();
         $form->validate("username", Rule::notEmpty(Errors::notEmpty("username")));
         $form->validate("password", Rule::notEmpty(Errors::notEmpty("password")));
-        if (!$serviceBroker->serviceExist($form->getValue("services"))) {
+        if (!$serviceBroker->serviceExist($form->getValue("services")) && $form->verify()) {
             $form->addError("service", "Invalid service");
             Flash::error($form->getErrors());
         } else {
             $passwordManager = new PasswordManager();
             $passwordManager->registerUserService($user, $form, $this->hasRememberMeToken());
         }
+        return $this->redirect("/General/Main");
     }
 
     public function modify()

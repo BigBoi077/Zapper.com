@@ -75,22 +75,24 @@ class Queries
                 FROM service";
     }
 
-    public static function getServiceInsertQuery():string
-    {
-        return "INSERT INTO service_user 
-                VALUES (?, ?, ?, ?)";
-    }
-
     public static function getUserServicesQuery(): string
     {
         return "SELECT *
-                FROM ";
+                FROM service_user
+                JOIN service s on service_user.id_service = s.id_service
+                WHERE id_user = ?";
     }
 
-    public static function getServiceExistQuery(): string
+    public static function getServiceByNameQuery(): string
     {
         return "SELECT *
                 FROM service
                 WHERE name = ?";
+    }
+
+    public static function getServiceUserInsertQuery(): string
+    {
+        return "INSERT INTO service_user
+                VALUES (?, ?, ?, ?)";
     }
 }

@@ -1,15 +1,16 @@
 <?php namespace Controllers;
 
 use Models\Brokers\TokenBroker;
+use Models\Classes\CookieBuilder;
 use Models\Classes\MenuHeader;
 use Models\Classes\User;
 use Zephyrus\Application\Session;
 use Zephyrus\Network\Response;
 use Zephyrus\Network\Router;
+use Zephyrus\Security\Cryptography;
 
 abstract class BaseController extends SecurityController
 {
-    protected const REMEMBER_ME = "remember-me";
     protected MenuHeader $menu;
 
     public function __construct(Router $router)
@@ -42,10 +43,10 @@ abstract class BaseController extends SecurityController
     protected function hasRememberMeToken(): bool
     {
         $broker = new TokenBroker();
-        if (!isset($_COOKIE[self::REMEMBER_ME])) {
+        if (!isset($_COOKIE[CookieBuilder::REMEMBER_ME])) {
             return false;
         }
-        return $broker->tokenExist($_COOKIE[self::REMEMBER_ME]);
+        return $broker->tokenExist($_COOKIE[CookieBuilder::REMEMBER_ME]);
     }
 
     public function setUserSessionInformation(User $user)

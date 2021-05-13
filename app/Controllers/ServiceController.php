@@ -1,8 +1,10 @@
 <?php namespace Controllers;
 
+use Models\Brokers\AccountBroker;
 use Models\Brokers\ServiceBroker;
 use Models\Classes\Errors;
 use Models\Classes\PasswordManager;
+use Models\Classes\User;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
@@ -20,16 +22,19 @@ class ServiceController extends BaseController
 
     public function register()
     {
-        $broker = new ServiceBroker();
+        $serviceBroker = new ServiceBroker();
+        $userBroker = new AccountBroker();
+        $user = new User();
+        $user = $userBroker->getById(sess("id"));
         $form = $this->buildForm();
         $form->validate("username", Rule::notEmpty(Errors::notEmpty("username")));
         $form->validate("password", Rule::notEmpty(Errors::notEmpty("password")));
-        if (!$broker->serviceExist($form->getValue("services"))) {
+        if (!$serviceBroker->serviceExist($form->getValue("services"))) {
             $form->addError("service", "Invalid service");
             Flash::error($form->getErrors());
         } else {
             $passwordManager = new PasswordManager();
-            $passwordManager->registerUserService($form);
+            $passwordManager->registerUserService($user, $form, $this->hasRememberMeToken());
         }
     }
 

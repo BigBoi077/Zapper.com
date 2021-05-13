@@ -4,6 +4,8 @@ use \Zephyrus\Network\Cookie;
 
 class CookieBuilder
 {
+    public const REMEMBER_ME = "remember-me";
+    public const USER_SECRET = "secret";
 
     public static function build(string $name, string $value)
     {

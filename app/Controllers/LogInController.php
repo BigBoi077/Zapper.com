@@ -7,6 +7,7 @@ use Models\Classes\FormValidator;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Session;
 use Zephyrus\Network\Response;
+use Zephyrus\Security\Cryptography;
 
 class LogInController extends BaseController
 {
@@ -38,10 +39,14 @@ class LogInController extends BaseController
             return $this->redirect("/");
         } else {
             $this->setUserSessionInformation($user);
+            $userSecret = Cryptography::encrypt($form->getValue("password"), $user->secret);
             if ($form->getValue("remember-me") == "on") {
                 $tokenBroker = new TokenBroker();
-                $value = $tokenBroker->insert(sess("id"));
-                CookieBuilder::build(self::REMEMBER_ME, $value);
+                $tokenValue = $tokenBroker->insert(sess("id"));
+                CookieBuilder::build(CookieBuilder::REMEMBER_ME, $tokenValue);
+                CookieBuilder::build(CookieBuilder::USER_SECRET, $userSecret);
+            } else {
+                Session::getInstance()->set("secret", $userSecret);
             }
             return $this->redirect("/General/Main");
         }
@@ -51,7 +56,8 @@ class LogInController extends BaseController
     {
         $broker = new TokenBroker();
         $broker->deleteUserToken(sess("id"));
-        CookieBuilder::destroy(self::REMEMBER_ME);
+        CookieBuilder::destroy(CookieBuilder::REMEMBER_ME);
+        CookieBuilder::destroy(CookieBuilder::USER_SECRET);
         Session::getInstance()->destroy();
         return $this->redirect("/");
     }

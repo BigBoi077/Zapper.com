@@ -45,11 +45,12 @@ block content
       header.modal-card-head
         p.modal-card-title Change credentials
         button.delete(aria-label='close' data-close-modal)
-      section.modal-card-body
-        // Content ...
-      footer.modal-card-foot
-        button.button.hover-success(type="submit") Save changes
-        button.button.error-red(data-close-modal) Cancel
+      form(action="/General/Service/Modify" method="post")
+        section.modal-card-body
+
+        footer.modal-card-foot
+          button.button.hover-success(type="submit") Save changes
+          button.button.error-red(data-close-modal) Cancel
 
   .modal(data-delete-modal="netflix" data-modal)
     .modal-background
@@ -57,11 +58,12 @@ block content
       header.modal-card-head
         p.modal-card-title Delete credentials
         button.delete(aria-label='close' data-close-modal)
-      section.modal-card-body
-        // Content ...
-      footer.modal-card-foot
-        button.button.error-red(type="submit") Delete
-        button.button(data-close-modal) Cancel
+      form(action="/General/Service/Remove" method="post")
+        section.modal-card-body
+
+        footer.modal-card-foot
+          button.button.error-red(type="submit") Delete
+          button.button(data-close-modal) Cancel
 
   .modal(data-add-modal data-modal)
     .modal-background
@@ -69,21 +71,20 @@ block content
       header.modal-card-head
         p.modal-card-title Add new service
         button.delete(aria-label='close' data-close-modal)
-      section.modal-card-body
-        form
+      form(action="/General/Service/Register" method="post")
+        section.modal-card-body
           .columns
             .column.is-8
               h1.title-medium.mt-2 Here are some of the services we support
             .column.is-4.flex
               .select.is-rounded
                 select(name="services")
-                  option(value="netflix") Netflix
-                  option(value="pinterest") Pinterest
-                  option(value="instagram") Instagram
+                  each service in services
+                    option(value=service.name)=service.name
           +usernamePasswordRow()
-      footer.modal-card-foot
-        button.button.hover-success(type="submit") Add
-        button.button(data-close-modal) Cancel
+        footer.modal-card-foot
+          button.button.hover-success(type="submit") Add
+          button.button(data-close-modal) Cancel
 
   a
     div#addService

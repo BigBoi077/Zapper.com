@@ -1,5 +1,7 @@
 <?php namespace Models\Classes;
 
+use Models\Brokers\ServiceBroker;
+
 class User
 {
     public int $id;
@@ -9,6 +11,7 @@ class User
     public String $email;
     public String $phone;
     public String $password;
+    public String $secret;
 
     public function __construct(\stdClass $result = null)
     {
@@ -22,5 +25,6 @@ class User
         $this->email = $result->email;
         $this->phone = $result->phone;
         $this->password = $result->password;
+        $this->secret = $result->secret;
     }
 }

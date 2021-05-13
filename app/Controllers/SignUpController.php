@@ -66,6 +66,7 @@ class SignUpController extends BaseController
         $user->phone = $form->getValue("phone");
         $user->email = $form->getValue("email");
         $user->password = Cryptography::hashPassword($form->getValue("password"));
+        $user->secret = Cryptography::randomString(64);
         return $user;
     }
 }

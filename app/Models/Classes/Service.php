@@ -2,7 +2,17 @@
 
 class Service
 {
-    private int $id;
-    private String $name;
-    private String $imagePath;
+    public int $id;
+    public String $name;
+    public String $imagePath;
+
+    public function __construct(\stdClass $result = null)
+    {
+        if (is_null($result)) {
+            return;
+        }
+        $this->id = $result->id;
+        $this->name = $result->name;
+        $this->imagePath = $result->image_path;
+    }
 }

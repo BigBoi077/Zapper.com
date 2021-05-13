@@ -4,8 +4,8 @@ class Queries
 {
     public static function getUserInsertQuery(): string
     {
-        return "INSERT INTO \"user\" (firstname, lastname, username, email, phone, password) 
-                VALUES (?, ?, ?, ?, ?, ?)";
+        return "INSERT INTO \"user\" (firstname, lastname, username, email, phone, password, secret) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
     }
 
     public static function getUsernameExistQuery(): string
@@ -31,20 +31,20 @@ class Queries
 
     public static function getTokenInsertQuery(): string
     {
-        return "INSERT INTO \"token\" (id_user, value, device, time) 
+        return "INSERT INTO token (id_user, value, device, time) 
                 VALUES (?, ?, ?, ?)";
     }
 
     public static function getTokenDeleteQuery(): string
     {
-        return "DELETE FROM \"token\" 
+        return "DELETE FROM token
                 WHERE id_user = ?";
     }
 
     public static function getTokenExistQuery(): string
     {
         return "SELECT *
-                FROM \"token\"
+                FROM token
                 WHERE value = ?";
     }
 
@@ -58,7 +58,7 @@ class Queries
     public static function getTokensByIdQuery(): string
     {
         return "SELECT *
-                FROM \"token\"
+                FROM token
                 WHERE id_user = ?";
     }
 
@@ -67,5 +67,30 @@ class Queries
         return "UPDATE \"user\"
                 SET firstname = ?, lastname = ?, username = ?, email = ?, phone = ?
                 WHERE id = ?";
+    }
+
+    public static function getAllServiceQuery(): string
+    {
+        return "SELECT *
+                FROM service";
+    }
+
+    public static function getServiceInsertQuery():string
+    {
+        return "INSERT INTO service_user 
+                VALUES (?, ?, ?, ?)";
+    }
+
+    public static function getUserServicesQuery(): string
+    {
+        return "SELECT *
+                FROM ";
+    }
+
+    public static function getServiceExistQuery(): string
+    {
+        return "SELECT *
+                FROM service
+                WHERE name = ?";
     }
 }

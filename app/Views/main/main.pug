@@ -7,63 +7,64 @@ block content
   +title("Hi there " + user.firstname + " welcome back!")
   +title("Here you can manage you own personal passwords for different services.")
   hr
-  .box.mt-4
-    form(action="" method="post")
-      .columns.is-vcentered
-        .column.is-2.flex
-          img.service-icon(src="/assets/images/service/pinterest.png")
-        .column.is-10
-          .columns.is-vcentered
-            .column.is-5
-              .form-group
-                .field
-                  .fas.fa-user-alt
-                  .control
-                    input.input(name="username" type='text' value="josh")
-            .column.is-5
-              .form-group
-                form-group
+  each userService in userServices
+    .box.mt-4
+      form(action="" method="post")
+        .columns.is-vcentered
+          .column.is-2.flex
+            img.service-icon(src=userService.image_path)
+          .column.is-10
+            .columns.is-vcentered
+              .column.is-5
+                .form-group
                   .field
-                    .fas.fa-fingerprint
+                    .fas.fa-user-alt
                     .control
-                      input.input(data-password-box="netflix" name="password" type='password' value="piss")
-            .column.is-2
-              .columns.mt-4
-                .column
-                  a
-                    .fas.fa-eye(data-password-reveal="netflix")
-                .column
-                  a
-                    .fas.fa-pen-fancy.no-style(data-modify-modal-target="netflix")
-                .column
-                  a
-                    .fas.fa-trash.error-red(data-delete-modal-target="netflix")
+                      input.input(name="username" type='text' value=userService.username)
+              .column.is-5
+                .form-group
+                  form-group
+                    .field
+                      .fas.fa-fingerprint
+                      .control
+                        input.input(data-password-box=userService.name name="password" type='password' value=userService.password)
+              .column.is-2
+                .columns.mt-4
+                  .column
+                    a
+                      .fas.fa-eye(data-password-reveal=userService.name)
+                  .column
+                    a
+                      .fas.fa-pen-fancy.no-style(data-modify-modal-target=userService.name)
+                  .column
+                    a
+                      .fas.fa-trash.error-red(data-delete-modal-target=userService.name)
 
-  .modal(data-modify-modal="netflix" data-modal)
-    .modal-background
-    .modal-card
-      header.modal-card-head
-        p.modal-card-title Change credentials
-        button.delete(aria-label='close' data-close-modal)
-      form(action="/General/Service/Modify" method="post")
-        section.modal-card-body
+    .modal(data-modify-modal=userService.name data-modal)
+      .modal-background
+      .modal-card
+        header.modal-card-head
+          p.modal-card-title Change credentials
+          button.delete(aria-label='close' data-close-modal)
+        form(action="/General/Service/Modify" method="post")
+          section.modal-card-body
 
-        footer.modal-card-foot
-          button.button.hover-success(type="submit") Save changes
-          button.button.error-red(data-close-modal) Cancel
+          footer.modal-card-foot
+            button.button.hover-success(type="submit") Save changes
+            button.button.error-red(data-close-modal) Cancel
 
-  .modal(data-delete-modal="netflix" data-modal)
-    .modal-background
-    .modal-card
-      header.modal-card-head
-        p.modal-card-title Delete credentials
-        button.delete(aria-label='close' data-close-modal)
-      form(action="/General/Service/Remove" method="post")
-        section.modal-card-body
+    .modal(data-delete-modal=userService.name data-modal)
+      .modal-background
+      .modal-card
+        header.modal-card-head
+          p.modal-card-title Delete credentials
+          button.delete(aria-label='close' data-close-modal)
+        form(action="/General/Service/Remove" method="post")
+          section.modal-card-body
 
-        footer.modal-card-foot
-          button.button.error-red(type="submit") Delete
-          button.button(data-close-modal) Cancel
+          footer.modal-card-foot
+            button.button.error-red(type="submit") Delete
+            button.button(data-close-modal) Cancel
 
   .modal(data-add-modal data-modal)
     .modal-background

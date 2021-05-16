@@ -47,9 +47,9 @@ export class EventPlacer {
         const modals = document.querySelectorAll('[data-delete-modal]');
         buttons.forEach(button =>
             button.addEventListener("click", function() {
-                const target  = button.dataset.modifyModalTarget;
+                const target  = button.dataset.deleteModalTarget;
                 modals.forEach(modal => {
-                        if (modal.dataset.modifyModal === target) {
+                        if (modal.dataset.deleteModal === target) {
                             modal.classList.toggle("is-active");
                         }
                     }

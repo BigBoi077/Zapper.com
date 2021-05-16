@@ -46,6 +46,16 @@ class ServiceController extends BaseController
 
     public function remove()
     {
-
+        $serviceBroker = new ServiceBroker();
+        $form = $this->buildForm();
+        $service = $form->getValue("service");
+        if (!$serviceBroker->serviceExist($service)) {
+            return $this->redirect("/General/Main");
+        }
+        $userId = sess("id");
+        $serviceId = $serviceBroker->getAccordingIdForService($service);
+        $serviceBroker->delete($userId, $serviceId);
+        Flash::success("Deleted your $service credentials successfully");
+        return $this->redirect("/General/Main");
     }
 }

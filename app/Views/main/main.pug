@@ -8,6 +8,7 @@ block content
   +title("Here you can manage you own personal passwords for different services.")
   hr
   each userService in userServices
+    - var name = userService.name;
     .box.mt-4
       form(action="" method="post")
         .columns.is-vcentered
@@ -48,7 +49,8 @@ block content
           button.delete(aria-label='close' data-close-modal)
         form(action="/General/Service/Modify" method="post")
           section.modal-card-body
-
+            h1.subtitle Here you can change your credentials for your #{name} account ?
+            +usernamePasswordRow()
           footer.modal-card-foot
             button.button.hover-success(type="submit") Save changes
             button.button.error-red(data-close-modal) Cancel
@@ -61,7 +63,8 @@ block content
           button.delete(aria-label='close' data-close-modal)
         form(action="/General/Service/Remove" method="post")
           section.modal-card-body
-
+            h1.subtitle Are you sure you want to delete your information for your #{name} account ?
+            input.input.is-hidden(name="service" type="text" value=userService.name)
           footer.modal-card-foot
             button.button.error-red(type="submit") Delete
             button.button(data-close-modal) Cancel

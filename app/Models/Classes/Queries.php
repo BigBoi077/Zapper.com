@@ -101,4 +101,20 @@ class Queries
         return "INSERT INTO log 
                 VALUES (?, ?, ?, ?, ?, ?, ?)";
     }
+
+    public static function getServiceUserDeleteQuery(): string
+    {
+        return "DELETE FROM service_user 
+                WHERE id_user = ? 
+                AND id_service = ?";
+    }
+
+    public static function getAccordingIdForServiceQuery(): string
+    {
+        return "SELECT s.id_service
+                FROM service AS s
+                JOIN service_user su on s.id_service = su.id_service
+                WHERE s.id_service = su.id_service
+                AND s.name = ?";
+    }
 }

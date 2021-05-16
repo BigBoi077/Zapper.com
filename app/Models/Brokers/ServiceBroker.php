@@ -45,4 +45,17 @@ class ServiceBroker extends Broker
             $serviceUser->password
         ]);
     }
+
+    public function delete(int $userId, int $serviceId)
+    {
+        $sql = Queries::getServiceUserDeleteQuery();
+        $this->query($sql, [$userId, $serviceId]);
+    }
+
+    public function getAccordingIdForService(string $service): int
+    {
+        $sql = Queries::getAccordingIdForServiceQuery();
+        $result = $this->selectSingle($sql, [$service]);
+        return $result->id_service;
+    }
 }

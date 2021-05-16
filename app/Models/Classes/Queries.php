@@ -95,4 +95,10 @@ class Queries
         return "INSERT INTO service_user
                 VALUES (?, ?, ?, ?)";
     }
+
+    public static function getInsertLogQuery(): string
+    {
+        return "INSERT INTO log 
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+    }
 }

@@ -2,6 +2,7 @@
 
 use Models\Brokers\SignUpBroker;
 use Models\Classes\FormValidator;
+use Models\Classes\Logger;
 use Models\Classes\User;
 use Zephyrus\Network\Response;
 use Zephyrus\Application\Flash;
@@ -42,6 +43,7 @@ class SignUpController extends BaseController
         } else {
             $user = $this->createUser($form);
             $this->setUserSessionInformation($user);
+            Logger::logUser($user->username);
             return $this->redirect("/General/Main");
         }
     }

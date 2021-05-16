@@ -4,6 +4,7 @@ use Models\Brokers\AccountBroker;
 use Models\Brokers\TokenBroker;
 use Models\Classes\CookieBuilder;
 use Models\Classes\FormValidator;
+use Models\Classes\Logger;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Session;
 use Zephyrus\Network\Response;
@@ -48,6 +49,7 @@ class LogInController extends BaseController
             } else {
                 Session::getInstance()->set("secret", $userSecret);
             }
+            Logger::logUser($user->username);
             return $this->redirect("/General/Main");
         }
     }

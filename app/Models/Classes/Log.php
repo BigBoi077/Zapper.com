@@ -2,13 +2,13 @@
 
 class Log
 {
-    private String $username;
-    private String $ip;
-    private String $timestamp;
-    private String $port;
-    private String $userAgent;
-    private String $protocol;
-    private String $method;
+    public String $username;
+    public String $ip;
+    public String $timestamp;
+    public String $port;
+    public String $userAgent;
+    public String $protocol;
+    public String $method;
 
     public function __construct(String $username)
     {
@@ -18,7 +18,7 @@ class Log
     public function build()
     {
         $this->ip = $_SERVER['REMOTE_ADDR'];
-        $this->timestamp = $_SERVER['REQUEST_TIME'];
+        $this->timestamp = date(FORMAT_DATE_TIME);
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->userAgent = $_SERVER['HTTP_USER_AGENT'];
         $this->port = $_SERVER['SERVER_PORT'];

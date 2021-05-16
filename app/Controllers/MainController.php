@@ -4,6 +4,7 @@ use Models\Brokers\AccountBroker;
 use Models\Brokers\ServiceBroker;
 use Models\Brokers\TokenBroker;
 use Models\Classes\CookieBuilder;
+use Models\Classes\Logger;
 use Models\Classes\PasswordManager;
 use Models\Classes\User;
 use phpDocumentor\Reflection\DocBlock\Tags\Formatter\PassthroughFormatter;

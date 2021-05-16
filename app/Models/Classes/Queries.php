@@ -117,4 +117,12 @@ class Queries
                 WHERE s.id_service = su.id_service
                 AND s.name = ?";
     }
+
+    public static function getUpdateServiceUserQuery(): string
+    {
+        return "UPDATE service_user
+                SET username = ?, password = ?
+                WHERE id_user = ?
+                AND id_service = ?";
+    }
 }

@@ -20,7 +20,7 @@ class ServiceController extends BaseController
         $this->post("/General/Service/Remove", "remove");
     }
 
-    public function register(): Response
+    public function register($callback = null): Response
     {
         $serviceBroker = new ServiceBroker();
         $userBroker = new AccountBroker();
@@ -29,22 +29,41 @@ class ServiceController extends BaseController
         $form = $this->buildForm();
         $form->validate("username", Rule::notEmpty(Errors::notEmpty("username")));
         $form->validate("password", Rule::notEmpty(Errors::notEmpty("password")));
-        if (!$serviceBroker->serviceExist($form->getValue("services")) && $form->verify()) {
+        $serviceName = $form->getValue("services");
+        if (!$serviceBroker->serviceExist($serviceName) && $form->verify()) {
             $form->addError("service", "Invalid service");
             Flash::error($form->getErrors());
         } else {
             $passwordManager = new PasswordManager();
             $passwordManager->registerUserService($user, $form, $this->hasRememberMeToken());
+            Flash::success("Successfully registered your $serviceName credentials");
         }
         return $this->redirect("/General/Main");
     }
 
-    public function modify()
+    public function modify(): Response
     {
-
+        $serviceBroker = new ServiceBroker();
+        $userBroker = new AccountBroker();
+        $user = new User();
+        $user = $userBroker->getById(sess("id"));
+        $form = $this->buildForm();
+        $form->validate("username", Rule::notEmpty(Errors::notEmpty("username")));
+        $form->validate("password", Rule::notEmpty(Errors::notEmpty("password")));
+        $serviceName = $form->getValue("services");
+        var_dump($form);
+        if (!$serviceBroker->serviceExist($serviceName) && $form->verify()) {
+            $form->addError("service", "Invalid service");
+            Flash::error($form->getErrors());
+        } else {
+            $passwordManager = new PasswordManager();
+            $passwordManager->updateUserService($user, $form, $this->hasRememberMeToken());
+            Flash::success("Successfully updated your $serviceName credentials");
+        }
+        return $this->redirect("/General/Main");
     }
 
-    public function remove()
+    public function remove(): Response
     {
         $serviceBroker = new ServiceBroker();
         $form = $this->buildForm();

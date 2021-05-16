@@ -50,6 +50,7 @@ block content
         form(action="/General/Service/Modify" method="post")
           section.modal-card-body
             h1.subtitle Here you can change your credentials for your #{name} account ?
+            input.input.is-hidden(name="services" type="text" value=userService.name)
             +usernamePasswordRow()
           footer.modal-card-foot
             button.button.hover-success(type="submit") Save changes

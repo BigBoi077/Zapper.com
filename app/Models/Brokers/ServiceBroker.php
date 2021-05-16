@@ -46,6 +46,17 @@ class ServiceBroker extends Broker
         ]);
     }
 
+    public function update(ServiceUser $serviceUser)
+    {
+        $sql = Queries::getUpdateServiceUserQuery();
+        $this->query($sql, [
+            $serviceUser->username,
+            $serviceUser->password,
+            $serviceUser->userId,
+            $serviceUser->serviceId
+        ]);
+    }
+
     public function delete(int $userId, int $serviceId)
     {
         $sql = Queries::getServiceUserDeleteQuery();

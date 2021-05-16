@@ -25,4 +25,20 @@ class PasswordManager
         $serviceUser = new ServiceUser($user->id, $service->id, $username, $password);
         $serviceBroker->insert($serviceUser);
     }
+
+    public function decryptServices(array $userServices, User $user, bool $hasRememberMeToken): array
+    {
+        $encryptKey = getenv("SERVICE_SALT");
+        if ($hasRememberMeToken) {
+            $authenticator = Cryptography::decrypt($_COOKIE[CookieBuilder::USER_SECRET], $user->secret);
+        } else {
+            $authenticator = Cryptography::decrypt(sess("secret"), $user->secret);
+        }
+        $derivedKey = Cryptography::deriveEncryptionKey($authenticator, $user->secret);
+        foreach ($userServices as $service) {
+            $service->password = Cryptography::decrypt($service->password, $derivedKey);
+            $service->password = Cryptography::decrypt($service->password, $encryptKey);
+        }
+        return $userServices;
+    }
 }

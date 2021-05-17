@@ -11,6 +11,7 @@ class CookieBuilder
     {
         $cookie = new Cookie($name, $value);
         $cookie->setLifetime(Cookie::DURATION_YEAR);
+        $cookie->setHttpOnly(true);
         $cookie->send();
     }
 

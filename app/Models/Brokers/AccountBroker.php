@@ -30,4 +30,13 @@ class AccountBroker extends Broker
             $user->phone,
             $user->id]);
     }
+
+    public function updatePassword(int $userId, string $newPassword)
+    {
+        $sql = Queries::updatePasswordQuery();
+        $this->query($sql, [
+            $newPassword,
+            $userId
+        ]);
+    }
 }

@@ -2,6 +2,7 @@
 @import "vendor/bulma.min.css";
 @import "vendor/fontawesome.min.css";
 @import "colors.css";
+@import "vendor/apple-switch.css";
 
 :root {
     --main-blue: #34b4cc;

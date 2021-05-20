@@ -36,7 +36,6 @@ class SignUpController extends BaseController
         $form = $this->buildForm();
         $validator = new FormValidator($form);
         $validator->validateSignUpRules();
-
         if (!$form->verify()) {
             Flash::error($form->getErrorMessages());
             return $this->redirect("/Connexion/Register");
@@ -55,7 +54,6 @@ class SignUpController extends BaseController
         $broker->insert($user);
         $this->setUserSessionInformation($user);
         Flash::success("Your account was created successfully!");
-        Session::getInstance()->set("isLogged", true);
         return $user;
     }
 
@@ -67,8 +65,9 @@ class SignUpController extends BaseController
         $user->lastname = $form->getValue("lastname");
         $user->phone = $form->getValue("phone");
         $user->email = $form->getValue("email");
-        $user->password = Cryptography::hashPassword($form->getValue("password"));
         $user->secret = Cryptography::randomString(64);
+        Session::getInstance()->set("secret", Cryptography::encrypt($form->getValue("password"), $user->secret));
+        $user->password = Cryptography::hashPassword($form->getValue("password"));
         return $user;
     }
 }

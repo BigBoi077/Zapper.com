@@ -22,7 +22,7 @@ class MainController extends BaseController
     {
         $broker = new AccountBroker();
         $user = new User();
-        $passwordManager = new PasswordManager();
+        $passwordManager = new PasswordManager($this->hasRememberMeToken());
         $serviceBroker = new ServiceBroker();
         $services = $serviceBroker->getAllService();
         if ($this->isLogged()) {
@@ -34,7 +34,9 @@ class MainController extends BaseController
         }
         $this->setUserSessionInformation($user);
         $userServices = $serviceBroker->getUserServices($user);
-        $userServices = $passwordManager->decryptServices($userServices, $user, $this->hasRememberMeToken());
+        if (!empty($userServices)) {
+            $userServices = $passwordManager->decryptServices($userServices, $user);
+        }
         return $this->render("/main/main", [
             'user' => $user,
             'services' => $services,

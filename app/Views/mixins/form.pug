@@ -15,6 +15,24 @@ mixin genders()
 			input(type="radio", name="gender", value="other")
 			i.fa.fa-transgender-alt.ml-2.mr-4s
 
+mixin authenticationChoices()
+	.columns
+		.column
+			label.form-switch
+				input(type='checkbox')
+				i
+				|   SMS verification
+		.column
+			label.form-switch
+				input(type='checkbox')
+				i
+				|   Email verification
+		.column
+			label.form-switch
+				input(type='checkbox')
+				i
+				|   Google authenticator
+
 mixin usernamePasswordRow()
 	.columns.is-vcentered
 		.column
@@ -62,3 +80,18 @@ mixin phoneRow(phone)
 					label.label Phone
 					.control
 						input.input(name="phone" type="text" value=phone)
+
+mixin passwordChangeRow()
+	.columns
+		.column
+			.form-group
+				.field
+					label.label Old password
+					.control
+						input.input(name="oldPassword" type="password")
+		.column
+			.form-group
+				.field
+					label.label Pew password
+					.control
+						input.input(name="newPassword" type="password")

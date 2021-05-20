@@ -20,7 +20,7 @@ class ServiceController extends BaseController
         $this->post("/General/Service/Remove", "remove");
     }
 
-    public function register($callback = null): Response
+    public function register(): Response
     {
         $serviceBroker = new ServiceBroker();
         $userBroker = new AccountBroker();
@@ -34,8 +34,8 @@ class ServiceController extends BaseController
             $form->addError("service", "Invalid service");
             Flash::error($form->getErrors());
         } else {
-            $passwordManager = new PasswordManager();
-            $passwordManager->registerUserService($user, $form, $this->hasRememberMeToken());
+            $passwordManager = new PasswordManager($this->hasRememberMeToken());
+            $passwordManager->registerUserService($user, $form);
             Flash::success("Successfully registered your $serviceName credentials");
         }
         return $this->redirect("/General/Main");
@@ -56,8 +56,8 @@ class ServiceController extends BaseController
             $form->addError("service", "Invalid service");
             Flash::error($form->getErrors());
         } else {
-            $passwordManager = new PasswordManager();
-            $passwordManager->updateUserService($user, $form, $this->hasRememberMeToken());
+            $passwordManager = new PasswordManager($this->hasRememberMeToken());
+            $passwordManager->updateUserService($user, $form);
             Flash::success("Successfully updated your $serviceName credentials");
         }
         return $this->redirect("/General/Main");

@@ -7,20 +7,32 @@ mixin changerCredentialsSection(user)
             +namesRow(user.firstname, user.lastname)
             +emailRow(user.email)
             +phoneRow(user.phone)
-            button.button.hover-success.mb-3 Change
+            button.button.hover-change.mb-3 Change
 
 mixin securitySection()
     .box
         .columns.ml-1.mt-3.mb-3
-            .fas.fa-shield-alt.mt-1.mt-2
+            .fas.fa-lock.mt-1.mt-2
             label.label.ml-1.font-size-medium Security
-        form.mb-4(action="/Personal/Authentication" method="post")
+        form.mb-4(action="/Personal/Security/Password" method="post")
             .columns.security-box
-                .form-group
-                    .field
-                        .control
-                            button.button.mr-2.hover-change Change password
-                .form-group
-                    .field
-                        .control
-                            button.button.mr-2.hover-change Activate two factor authentication
+                .column
+                    .form-group
+                        .field
+                            .control
+                                +passwordChangeRow()
+                                button.button.mr-2.hover-change Change password
+
+mixin authenticationSection()
+    .box
+        .columns.ml-1.mt-3.mb-3
+            .fas.fa-user-secret.mt-1.mt-2
+            label.label.ml-1.font-size-medium Second factor authentication
+        form.mb-4(action="/Personal/Security/Authentication" method="post")
+            .columns.security-box
+                .column
+                    .form-group
+                        .field
+                            .control
+                                +authenticationChoices()
+                                button.button.mr-2.hover-change Activate two factor authentication

@@ -125,4 +125,18 @@ class Queries
                 WHERE id_user = ?
                 AND id_service = ?";
     }
+
+    public static function getAllUserServicesQuery(): string
+    {
+        return "SELECT *
+                FROM service_user
+                WHERE id_user = ?";
+    }
+
+    public static function updatePasswordQuery(): string
+    {
+        return "UPDATE \"user\"
+                SET password = ?
+                WHERE id = ?";
+    }
 }

@@ -12,6 +12,7 @@ class User
     public String $phone;
     public String $password;
     public String $secret;
+    public int $authentication;
 
     public function __construct(\stdClass $result = null)
     {
@@ -26,5 +27,6 @@ class User
         $this->phone = $result->phone;
         $this->password = $result->password;
         $this->secret = $result->secret;
+        $this->authentication = $result->authentication;
     }
 }

@@ -28,6 +28,7 @@ class AccountBroker extends Broker
             $user->username,
             $user->email,
             $user->phone,
+            $user->authentication,
             $user->id]);
     }
 

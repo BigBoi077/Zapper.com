@@ -65,6 +65,7 @@ class SignUpController extends BaseController
         $user->lastname = $form->getValue("lastname");
         $user->phone = $form->getValue("phone");
         $user->email = $form->getValue("email");
+        $user->authentication = 0;
         $user->secret = Cryptography::randomString(64);
         Session::getInstance()->set("secret", Cryptography::encrypt($form->getValue("password"), $user->secret));
         $user->password = Cryptography::hashPassword($form->getValue("password"));

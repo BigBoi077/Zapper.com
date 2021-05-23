@@ -2,14 +2,26 @@
 
 use Models\Brokers\AccountBroker;
 use Models\Brokers\TokenBroker;
+use Models\Classes\Authenticator;
 use Models\Classes\Errors;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Rule;
 use Zephyrus\Network\Response;
+use Zephyrus\Network\Router;
 use Zephyrus\Utilities\Gravatar;
 
 class AccountController extends BaseController
 {
+    private array $authenticators;
+
+    public function __construct(Router $router)
+    {
+        parent::__construct($router);
+        $this->authenticators = array();
+        array_push($this->authenticators, new Authenticator("sms", "SMS verification", 1));
+        array_push($this->authenticators, new Authenticator("email", "Email verification", 2));
+        array_push($this->authenticators, new Authenticator("googleAuth", "Google authenticator", 4));
+    }
 
     public function initializeRoutes()
     {
@@ -24,11 +36,16 @@ class AccountController extends BaseController
         $tokenBroker = new TokenBroker();
         $tokens = $tokenBroker->getTokensById(sess("id"));
         $gravatar = new Gravatar(sess("email"));
+        foreach ($this->authenticators as $authenticator) {
+            $authenticator->isActivated = $user->authentication & $authenticator->value;
+        }
         return $this->render("/account/personal", [
             'currentPage' => "Account",
             'user' => $user,
-            "tokens" => $tokens,
-            'gravatar' => $gravatar->getUrl()
+            'tokens' => $tokens,
+            'gravatar' => $gravatar->getUrl(),
+            'authenticators' => $this->authenticators,
+            'userAuthentication' => $user->authentication
         ]);
     }
 

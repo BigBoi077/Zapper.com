@@ -65,7 +65,7 @@ class Queries
     public static function getUserUpdateQuery(): string
     {
         return "UPDATE \"user\"
-                SET firstname = ?, lastname = ?, username = ?, email = ?, phone = ?
+                SET firstname = ?, lastname = ?, username = ?, email = ?, phone = ?, authentication = ?
                 WHERE id = ?";
     }
 

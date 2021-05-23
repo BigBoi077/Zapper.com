@@ -17,21 +17,20 @@ mixin genders()
 
 mixin authenticationChoices()
 	.columns
-		.column
-			label.form-switch
-				input(type='checkbox')
-				i
-				|   SMS verification
-		.column
-			label.form-switch
-				input(type='checkbox')
-				i
-				|   Email verification
-		.column
-			label.form-switch
-				input(type='checkbox')
-				i
-				|   Google authenticator
+		each authenticator in authenticators
+			if authenticator.isActivated
+				.column
+					label.form-switch
+						input(type='checkbox' name=authenticator.slug checked)
+						i
+						=authenticator.description
+			else
+				.column
+					label.form-switch
+						input(type='checkbox' name=authenticator.slug)
+						i
+						=authenticator.description
+
 
 mixin usernamePasswordRow()
 	.columns.is-vcentered

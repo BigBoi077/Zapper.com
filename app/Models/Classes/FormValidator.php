@@ -30,11 +30,12 @@ class FormValidator
 
     public function isUserValid(User $user, Form $form): bool
     {
-        if (!isset($user->password)) {
+        if (!(isset($user->username) || isset($user->password))) {
             return false;
         }
         $clearTextPassword = $form->getValue("password");
-        return !(Cryptography::verifyHashedPassword($clearTextPassword, $user->password)
-            && strcmp($form->getValue("username"), $user->username));
+        $strcmpResult = strcmp($form->getValue("username"), $user->username);
+        return (Cryptography::verifyHashedPassword($clearTextPassword, $user->password)
+            && $strcmpResult == 0);
     }
 }

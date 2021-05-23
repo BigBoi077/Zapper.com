@@ -8,7 +8,9 @@ use Models\Classes\Logger;
 use Models\Classes\PasswordManager;
 use Models\Classes\User;
 use phpDocumentor\Reflection\DocBlock\Tags\Formatter\PassthroughFormatter;
+use Zephyrus\Application\Session;
 use Zephyrus\Network\Response;
+use Zephyrus\Security\Cryptography;
 
 class MainController extends BaseController
 {

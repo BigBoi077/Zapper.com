@@ -3,7 +3,6 @@
 use Models\Brokers\AccountBroker;
 use Models\Classes\Errors;
 use Models\Classes\PasswordManager;
-use phpDocumentor\Reflection\DocBlock\Tags\BaseTag;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Rule;
 use \Zephyrus\Network\Response;
@@ -62,8 +61,12 @@ class AuthenticationController extends BaseController
             '+14504943201',
             array(
                 'from' => $twilio_number,
-                'body' => 'I sent this message in under 10 minutes!'
+                'body' => 'Here is your verification code'
             )
         );
+    }
+
+    private function updateSecret()
+    {
     }
 }

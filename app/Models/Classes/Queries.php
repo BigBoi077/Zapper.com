@@ -139,4 +139,23 @@ class Queries
                 SET password = ?
                 WHERE id = ?";
     }
+
+    public static function getSMSTokenInsertQuery(): string
+    {
+        return "INSERT INTO sms_token 
+                VALUES (?, ?)";
+    }
+
+    public static function getSMSTokenExistQuery(): string
+    {
+        return "SELECT * 
+                FROM sms_token
+                WHERE value = ?";
+    }
+
+    public static function getDeleteSMSTokenQuery(): string
+    {
+        return "DELETE FROM sms_token 
+                WHERE value = ?";
+    }
 }

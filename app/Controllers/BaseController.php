@@ -40,6 +40,17 @@ abstract class BaseController extends SecurityController
         return Session::getInstance()->read("isLogged", false);
     }
 
+    protected function isVerified(User $user)
+    {
+        if ($user->authentication == 0) {
+            return true;
+        }
+        if (Session::getInstance()->has("isVerified")) {
+            return sess("isVerified");
+        }
+        return false;
+    }
+
     protected function hasRememberMeToken(): bool
     {
         $broker = new TokenBroker();
@@ -56,6 +67,7 @@ abstract class BaseController extends SecurityController
         Session::getInstance()->set("username", $user->username);
         Session::getInstance()->set("email", $user->email);
         Session::getInstance()->set("phone", $user->phone);
+        Session::getInstance()->set("authentication", $user->authentication);
         Session::getInstance()->set("isLogged", true);
     }
 }

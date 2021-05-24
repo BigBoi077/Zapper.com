@@ -43,4 +43,33 @@ class TokenBroker extends Broker
         $sql = Queries::getTokensByIdQuery();
         return $this->select($sql, [$userId]);
     }
+
+    public function insertSMSToken(int $id, int $verificationCode)
+    {
+        $sql = Queries::getSMSTokenInsertQuery();
+        $this->query($sql, [$id, $verificationCode]);
+    }
+
+    public function exists(string $fullCode): bool
+    {
+        $fullCode = intval($fullCode);
+        $sql = Queries::getSMSTokenExistQuery();
+        $result = $this->selectSingle($sql, [$fullCode]);
+        return !is_null($result);
+    }
+
+    public function getUserIdBySMSToken(string $fullCode): int
+    {
+        $fullCode = intval($fullCode);
+        $sql = Queries::getSMSTokenExistQuery();
+        $result = $this->selectSingle($sql, [$fullCode]);
+        return $result->id_user;
+    }
+
+    public function deleteSMSToken(string $fullCode)
+    {
+        $fullCode = intval($fullCode);
+        $sql = Queries::getDeleteSMSTokenQuery();
+        $this->query($sql, [$fullCode]);
+    }
 }

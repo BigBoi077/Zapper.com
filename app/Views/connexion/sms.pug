@@ -1,0 +1,24 @@
+extends ../layout-no-header
+
+block content
+    .box.mt-4
+        - var phone = phoneNumber
+        h1.has-text-centered.subtitle A verification code has been sent to +#{phone},
+        h1.has-text-centered.subtitle verify it bellow to connect
+        form(action="/Connexion/Authentication/SMS/Verify" method="post")
+            .columns.flex
+                .column.is-1
+                    input.input(name="code[]")
+                .column.is-1
+                    input.input(name="code[]")
+                .column.is-1
+                    input.input(name="code[]")
+                .column.is-1
+                    input.input(name="code[]")
+                .column.is-1
+                    input.input(name="code[]")
+                .column.is-1
+                    input.input(name="code[]")
+            .columns
+                .column.flex
+                    button.button.hover-success.flex(type="submit") Save changes

@@ -1,0 +1,25 @@
+include mixins/form
+include mixins/base
+include mixins/utils
+include mixins/section
+include mixins/modal
+include mixins/list
+include components/head
+
+body.reveal
+    .columns.header-container
+        .column.is-2
+            a(href="/")
+                img(src="/assets/images/zapper-logo.png")
+        .column.main-content
+            include ./components/header-no-menu
+        .column.is-2
+    .columns
+        .column.is-2
+        .column
+            hr
+            +flash
+            block content
+        .column.is-2
+    block scripts
+    block footer

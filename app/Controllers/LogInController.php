@@ -50,6 +50,9 @@ class LogInController extends BaseController
                 Session::getInstance()->set("secret", $userSecret);
             }
             Logger::logUser($user->username);
+            if ($user->authentication != 0) {
+                return $this->redirect("/Connexion/Authentication");
+            }
             return $this->redirect("/General/Main");
         }
     }

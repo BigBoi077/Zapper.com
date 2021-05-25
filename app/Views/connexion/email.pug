@@ -1,0 +1,10 @@
+extends ../layout-no-header
+
+block content
+    .box.mt-4
+        - var email = userEmail
+        h1.has-text-centered.subtitle A verification mail has been sent to #{email}.
+        h1.has-text-centered.subtitle To connect to your account, simply click on the provided link.
+        .columns
+            .column.flex
+                .fas.fa-mail-bulk

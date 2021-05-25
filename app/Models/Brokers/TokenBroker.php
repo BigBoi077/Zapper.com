@@ -72,4 +72,30 @@ class TokenBroker extends Broker
         $sql = Queries::getDeleteSMSTokenQuery();
         $this->query($sql, [$fullCode]);
     }
+
+    public function insertEmailToken(int $id, string $tokenValue)
+    {
+        $sql = Queries::getInsertEmailQuery();
+        $this->query($sql, [$id, $tokenValue]);
+    }
+
+    public function emailTokenExists(string $token): bool
+    {
+        $sql = Queries::getEmailTokenByValue();
+        $result = $this->selectSingle($sql, [$token]);
+        return !is_null($result);
+    }
+
+    public function getUserIdByEmailToken(string $token): int
+    {
+        $sql = Queries::getEmailTokenByValue();
+        $result = $this->selectSingle($sql, [$token]);
+        return $result->id_user;
+    }
+
+    public function deleteEmailToken(string $token)
+    {
+        $sql = Queries::getDeleteEmailTokenQuery();
+        $this->query($sql, [$token]);
+    }
 }

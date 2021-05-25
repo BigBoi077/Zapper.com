@@ -158,4 +158,23 @@ class Queries
         return "DELETE FROM sms_token 
                 WHERE value = ?";
     }
+
+    public static function getInsertEmailQuery(): string
+    {
+        return "INSERT INTO email_token 
+                VALUES (?, ?)";
+    }
+
+    public static function getEmailTokenByValue(): string
+    {
+        return "SELECT * 
+                FROM email_token 
+                WHERE value = ?";
+    }
+
+    public static function getDeleteEmailTokenQuery(): string
+    {
+        return "DELETE FROM email_token 
+                WHERE value = ?";
+    }
 }

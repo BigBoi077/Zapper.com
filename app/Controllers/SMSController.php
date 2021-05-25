@@ -41,7 +41,6 @@ class SMSController extends BaseController
         }
         if (is_numeric($fullCode)) {
             if ($tokenBroker->exists($fullCode)) {
-                var_dump("TOKEN REAL");
                 $id = $tokenBroker->getUserIdBySMSToken($fullCode);
                 if ($id == sess("id")) {
                     Session::getInstance()->set("isVerified", true);

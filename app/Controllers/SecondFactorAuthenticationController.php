@@ -29,10 +29,8 @@ class SecondFactorAuthenticationController extends BaseController
             return $this->redirect("/Connexion/Authentication/SMS");
         }
         if ($userBitwiseValue & self::EMAIL_BITWISE) {
+            Session::getInstance()->set("needsNewCode", true);
             return $this->redirect("/Connexion/Authentication/Email");
-        }
-        if ($userBitwiseValue & self::GOOGLE_AUTH_BITWISE) {
-            return $this->redirect("/Connexion/Authentication/GoogleAuthenticator");
         }
     }
 }

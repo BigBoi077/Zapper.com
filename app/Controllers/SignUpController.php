@@ -12,8 +12,6 @@ use Zephyrus\Security\Cryptography;
 
 class SignUpController extends BaseController
 {
-    private const emptyArray = [ 'firstname' => '', 'lastname' => '', 'username' => '', 'phone' => '', 'email' => '' ];
-
     public function initializeRoutes()
     {
         $this->get("/Connexion/Register", "index");
@@ -27,7 +25,7 @@ class SignUpController extends BaseController
         }
         return $this->render("/connexion/sign-up", [
             'currentPage' => "Sign up",
-            'values' => self::emptyArray,
+            'values' => sess("userSignUp"),
         ]);
     }
 
@@ -38,6 +36,7 @@ class SignUpController extends BaseController
         $validator->validateSignUpRules();
         if (!$form->verify()) {
             Flash::error($form->getErrorMessages());
+            $this->setSignUpSessInformation($form);
             return $this->redirect("/Connexion/Register");
         } else {
             $user = $this->createUser($form);
@@ -70,5 +69,16 @@ class SignUpController extends BaseController
         Session::getInstance()->set("secret", Cryptography::encrypt($form->getValue("password"), $user->secret));
         $user->password = Cryptography::hashPassword($form->getValue("password"));
         return $user;
+    }
+
+    private function setSignUpSessInformation(Form $form)
+    {
+        $signUpArray = ['firstname' => '', 'lastname' => '', 'username' => '', 'phone' => '', 'email' => '' ];
+        $signUpArray['username'] = $form->getValue("username");
+        $signUpArray['firstname'] = $form->getValue("firstname");
+        $signUpArray['lastname'] = $form->getValue("lastname");
+        $signUpArray['phone'] = $form->getValue("phone");
+        $signUpArray['email'] = $form->getValue("email");
+        Session::getInstance()->set("userSignUp", $signUpArray);
     }
 }

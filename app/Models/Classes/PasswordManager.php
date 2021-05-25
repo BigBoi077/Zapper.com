@@ -36,7 +36,6 @@ class PasswordManager
     {
         $allUserServices = $this->serviceBroker->getUserServices($user);
         $allUserServices = $this->decryptServices($allUserServices, $user);
-        $this->changeUserSecret($user, $newPassword);
         $derivedKey = Cryptography::deriveEncryptionKey($newPassword, $user->secret);
         foreach ($allUserServices as $service) {
             $service->password = Cryptography::encrypt($service->password, $this->encryptKey);
@@ -49,6 +48,7 @@ class PasswordManager
             );
             $this->serviceBroker->update($service);
         }
+        $this->changeUserSecret($user, $newPassword);
     }
 
     public function decryptServices(array $userServices, User $user): array

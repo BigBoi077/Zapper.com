@@ -15,7 +15,8 @@ class SignUpBroker extends Broker
             $user->email,
             $user->phone,
             $user->password,
-            $user->secret
+            $user->secret,
+            $user->authentication
         ]);
         $sql = Queries::getUserByUsernameQuery();
         $user->id = $this->selectSingle($sql, [$user->username])->id;

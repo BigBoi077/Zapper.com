@@ -4,8 +4,8 @@ class Queries
 {
     public static function getUserInsertQuery(): string
     {
-        return "INSERT INTO \"user\" (firstname, lastname, username, email, phone, password, secret) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        return "INSERT INTO \"user\" (firstname, lastname, username, email, phone, password, secret, authentication) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     }
 
     public static function getUsernameExistQuery(): string
